@@ -1,3 +1,6 @@
+# this code is designed for the difference comparison 
+# between euler and original method 
+
 import numpy as np
 import matplotlib.pyplot as plt
 
