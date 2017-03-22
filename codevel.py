@@ -1,6 +1,6 @@
 # this code is designed for plotting the bungee jumper's velocity
 # this code evaluates whether the velocity is above 36m/s
-# or not when time is 4 seconds,
+# or not when time is 4 seconds.
 
 import numpy as np
 import matplotlib.pyplot as plt
