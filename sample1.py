@@ -87,10 +87,9 @@
 83   t=np.arange(5) 
 84   window.mainloop() 
 85   label.pack() 
-86   label=Label(window, text="Hello World") 
 87   lavel=Label(window, text="Hello World") 
-88   window=Tk() 
 89   window-Tk() 
+
 90   from tkinter import * 
 91   t.forward(100) 
 92   t.right(90) 
