@@ -16,7 +16,7 @@ def incsearch(func, xmin, xmax):
     return nb, xb
 
 
-g=9.81; m=68.1; cd=0.25; v=36; t=4;
+g=9.81; cd=0.25; v=36; t=4;
 fp=lambda mp:np.sqrt(g*np.array(mp)/cd)*np.tanh(np.sqrt(g*cd/np.array(mp))*t)-v
 nb, xb=incsearch(fp, 1, 200)
 print('number of brackets= ',nb)
