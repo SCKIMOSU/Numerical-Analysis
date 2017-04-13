@@ -20,9 +20,11 @@ def newton_raphson(func, dfunc, xr):
 
 
         if np.int(ea <= es) | np.int(iter >= maxit):
-            root=xr
-            fx=func(xr)
-            return root, fx, ea, iter
+            break
+            
+        root=xr
+        fx=func(xr)
+    return root, fx, ea, iter
 
 
 g=9.81; cd=0.25; v=36; t=4;
