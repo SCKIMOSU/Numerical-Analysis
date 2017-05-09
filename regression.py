@@ -39,6 +39,19 @@ plt.plot(x, np.polyval(p2,x), 'b>-')
 plt.plot(x, np.polyval(p3,x), 'mx-')
 
 
+plt.figure(4)
+plt.plot(x, y, 'o')
+plt.grid()
+xp=np.linspace(-2, 6, 100)
 
+plt.plot(xp, np.polyval(p1,xp), 'r-') 
+# p1 from np.polyfit, plot(x, p1 with
+
+# np.polyval(p1,x)= array([ 0.75714286, 0.45428571, 0.15142857, -0.15142857,-0.45428571, -0.75714286])
+
+plt.plot(xp, np.polyval(p2,xp), 'b--') # --: dached line
+# np.polyval(p2,x)=array([ 0.22142857,0.58, 0.27714286, -0.34714286, - 1.29285714])
+
+plt.plot(xp, np.polyval(p3,xp), 'm:')
 
 
