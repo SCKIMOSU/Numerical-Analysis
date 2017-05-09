@@ -16,6 +16,11 @@ fx=b*x+a
 
 p1=np.polyfit(x, y, 1)
 # p1=array([-0.30285714,  0.75714286])
+p2=np.polyfit(x, y, 2)
+# array([-0.16071429,  0.50071429,  0.22142857])
+p3=np.polyfit(x, y, 3)
+# array([ 0.08703704, -0.81349206,  1.69312169, -0.03968254])
+
 
 plt.figure(1)
 plt.plot(x,y, 'o')
@@ -26,6 +31,12 @@ plt.plot(x,y, 'o')
 plt.plot(x, np.polyval(p1, x), 'b*-')
 # = plt.plot(x,fx, 'r*-')
 
+
+plt.figure(3)
+plt.plot(x,y, 'o')
+plt.plot(x, np.polyval(p1,x), 'r*-')
+plt.plot(x, np.polyval(p2,x), 'b>-')
+plt.plot(x, np.polyval(p3,x), 'mx-')
 
 
 
