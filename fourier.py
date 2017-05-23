@@ -69,4 +69,106 @@ plt.grid()
 
 
 
+########### Sinusoids (정현파)의 평균값 (mean value) 바꾸기
+
+Fs = 150.0 # sampling rate
+Ts = 1.0/Fs # sampling interval
+t = np.arange(0,1,Ts) # time vector
+ff = 5
+# frequency of the signal
+y = np.sin(2*np.pi*ff*t)
+a0=2
+y1= a0+np.sin(2*np.pi*ff*t)
+###########
+plt.figure(100)
+plt.subplot(2,1,1)
+plt.plot(t,y, 'b.')
+# np.size(t) = 150
+# np.size(y) = 150
+plt.xlabel('Time')
+plt.ylabel('sin(t)')
+plt.grid()
+plt.subplot(2,1,2)
+plt.plot(t,y1,'r*')
+plt.xlabel('Time')
+plt.ylabel('a0+sin(t)')
+plt.grid()
+
+
+############  Sinusoids (정현파)의 진폭 (Amplitude) 바꾸기
+Fs = 150.0 # sampling rate
+Ts = 1.0/Fs # sampling interval
+t = np.arange(0,1,Ts) # time vector
+ff = 5
+# frequency of the signal
+y = np.sin(2*np.pi*ff*t)
+c1=3
+y2= c1*np.sin(2*np.pi*ff*t)
+###########
+plt.figure(101)
+plt.subplot(2,1,1)
+plt.plot(t,y, 'b.')
+# np.size(t) = 150
+# np.size(y) = 150
+plt.xlabel('Time')
+plt.ylabel('sin(t)')
+plt.grid()
+plt.subplot(2,1,2)
+plt.plot(t,y2,'r*')
+plt.xlabel('Time')
+plt.ylabel('c1*sin(t)')
+plt.grid()
+
+############# Sinusoids (정현파)의 주파수 바꾸기
+Fs = 150.0 # sampling rate
+Ts = 1.0/Fs # sampling interval
+t = np.arange(0,1,Ts) # time vector
+ff = 5
+# frequency of the signal
+y = np.sin(2*np.pi*ff*t)
+# (sin(2*np.pi) 를 ) 1 초 (t) 안에 5 개 (ff) 의 2*pi 주기의
+# sin 파를 만들어라 . 그런데 , 1 초 안에는 150 개의 점을 찍어라 .
+# np.size(y)=150
+ff1=10
+y3 = np.sin(2*np.pi*ff1*t)
+# 1 초 (t) 안에 10 개 (ff1) 의 2*pi 주기의 sin 파를
+# 만들어라. 그런데 , 1 초 안에는 150 개의 점을 찍어라 .
+plt.figure(102)
+plt.subplot(2,1,1)
+plt.plot(t,y, 'b.-')
+# np.size(t) = 150
+# np.size(y) = 150
+plt.xlabel('Time')
+plt.ylabel('sin(2*pi*5*t)')
+plt.grid()
+plt.subplot(2,1,2)
+plt.plot(t,y3,'r*-')
+plt.xlabel('Time')
+plt.ylabel('sin(2*pi*10*t)')
+plt.grid()
+
+##############Sinusoids (정현파)의 위상 바꾸기
+Fs = 150.0 # sampling rate
+Ts = 1.0/Fs # sampling interval
+t = np.arange(0,1,Ts) # time vector
+ff = 5
+# frequency of the signal
+y = np.sin(2*np.pi*ff*t)
+theta=np.pi/2
+y4 = np.sin(2*np.pi*ff*t+theta)
+###########
+plt.figure(103)
+plt.subplot(2,1,1)
+plt.plot(t,y, 'b.-')
+plt.xlabel('Time')
+plt.ylabel('sin(2*pi*5*t)')
+plt.grid()
+plt.subplot(2,1,2)
+plt.plot(t,y4,'r*-')
+plt.xlabel('Time')
+plt.ylabel('sin(2*pi*5*t+np.pi/2)')
+plt.grid()
+
+
+
 
