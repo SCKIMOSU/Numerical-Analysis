@@ -217,6 +217,29 @@ for loop in np.arange(1, 10, 1):
     plt.pause(3)
 
 
+#################################
+
+
+plt.figure(11)
+f1=(1/1)*np.sin(1*2 * np.pi * ff1 * t)
+plt.plot(t, f1)
+f3=(1/3)*np.sin(3*2 * np.pi * ff1 * t)
+plt.plot(t, f3)
+f5=(1/5)*np.sin(5*2 * np.pi * ff1 * t)
+plt.plot(t, f5)
+f7=(1/7)*np.sin(7*2 * np.pi * ff1 * t)
+plt.plot(t, f7)
+f9=(1/9)*np.sin(9*2 * np.pi * ff1 * t)
+plt.plot(t, f9)
+f11=(1/11)*np.sin(11*2 * np.pi * ff1 * t)
+plt.plot(t, f11)
+f13=(1/13)*np.sin(13*2 * np.pi * ff1 *t)
+plt.plot(t, f13)
+f15=(1/15)*np.sin(15*2 * np.pi * ff1 *t)
+plt.plot(t, f15)
+f17=(1/17)*np.sin(17*2 * np.pi * ff1 *t)
+plt.plot(t, f17)
+
 
 
 
