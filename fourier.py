@@ -253,5 +253,19 @@ plt.plot(t, f3)
 plt.subplot(3, 1, 3)
 plt.plot(t, f1+f3)
 
+################################
+plt.figure(14)
+f1=(1/1)*np.sin(1*2 * np.pi * ff1 * t)
+plt.subplot(4, 1, 1)
+plt.plot(t, f1)
+f3=(1/3)*np.sin(3*2 * np.pi * ff1 * t)
+plt.subplot(4, 1, 2)
+plt.plot(t, f3)
+f5=(1/5)*np.sin(5*2 * np.pi * ff1 * t)
+plt.subplot(4, 1, 3)
+plt.plot(t, f5)
+plt.subplot(4, 1, 4)
+plt.plot(t, f1+f3+f5)
+
 
 
