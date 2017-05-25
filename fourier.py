@@ -170,5 +170,53 @@ plt.ylabel('sin(2*pi*5*t+np.pi/2)')
 plt.grid()
 
 
+############################
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+Fs = 150.0
+Ts = 1.0/Fs
+t = np.arange(0, 1, Ts)
+ff1 = 1
+c1=1
+sqwave1 = (1/c1)*np.sin(c1*2 * np.pi * ff1 * t)
+plt.figure(1)
+plt.plot(t, sqwave1)
+
+c1=c1+2
+sqwave3 = (1/c1)*np.sin(c1*2 * np.pi * ff1 * t)
+plt.plot(t, sqwave3)
+
+c1=c1+2
+sqwave5 = (1/c1)*np.sin(c1*2 * np.pi * ff1 * t)
+plt.plot(t, sqwave5)
+
+
+#plt.figure(2)
+
+sqwave = sqwave1+sqwave3+sqwave5
+plt.plot(t, sqwave)
+
+
+Fs = 150.0 # sampling rate
+Ts = 1.0/Fs # sampling interval
+t = np.arange(0, 1, Ts)
+# time vector
+ff1 = 1 # frequency of the signal
+sqwave=0
+c1=1
+plt.figure(201)
+
+for loop in np.arange(1, 10, 1):
+    sqwave = sqwave + (1/c1)*np.sin(c1*2 * np.pi * ff1 * t)
+    # fourier series
+    plt.plot(t, sqwave)
+    c1=c1+2
+    plt.pause(3)
+
+
+
 
 
