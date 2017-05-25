@@ -241,5 +241,17 @@ f17=(1/17)*np.sin(17*2 * np.pi * ff1 *t)
 plt.plot(t, f17)
 
 
+#################################
+
+plt.figure(13)
+f1=(1/1)*np.sin(1*2 * np.pi * ff1 * t)
+plt.subplot(3, 1, 1)
+plt.plot(t, f1)
+f3=(1/3)*np.sin(3*2 * np.pi * ff1 * t)
+plt.subplot(3, 1, 2)
+plt.plot(t, f3)
+plt.subplot(3, 1, 3)
+plt.plot(t, f1+f3)
+
 
 
