@@ -1,11 +1,14 @@
-1. 파이참 설치 영상
-https://youtu.be/ClQppYllGKE 
+1. pycharm 설치: 우부투에서 파이참 IDE 설치하기 
+- 파이참 설치 영상: https://youtu.be/ClQppYllGKE 
 
-2. 아나콘다 설치 영상
-https://youtu.be/OeWBmxKzYOQ
+2. anaconda 설치: 우분투에서 아나콘다 인터프리터 설치하기 (아나콘다는 올인원 팩키지 인터프리터임) 
+- 아나콘다 설치 영상: https://youtu.be/OeWBmxKzYOQ
 
-3. 파이참과 아나콘다 연동 설명 영상
-https://youtu.be/bgFKPgjxxqs
+3. 파이참_아나콘다연동: 우분투에서 파이참 IDE와 아나콘다 인터프리터 연동하기
+- 파이참과 아나콘다 연동 설명 영상: https://youtu.be/bgFKPgjxxqs
 
-4. 텐서플로우 설치 영상
-https://youtu.be/5ahUc6zB3NI 
+4. tensorflow설치: 우분투에서 데이터 해석, 머신러닝을 위한 구글 텐서플로 플랫폼 설치하기 
+- 텐서플로우 설치 영상: https://youtu.be/5ahUc6zB3NI 
+
+5. 파이참디버깅: 데이터시각화 예제를 통한 파이참 디버깅 소개(콘솔 디버깅과 UI 디버깅의 차이 소개) 
+- 파이참디버깅 영상: https://youtu.be/4dnSdcGT_mk 
