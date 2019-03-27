@@ -19,3 +19,11 @@ nb, xb=incsearch(func, 3, 6, 50)
 print('number of brackets= ', nb)
 print('root interval=', xb)
 
+
+import matplotlib.pyplot as plt
+x=np.linspace(3, 6, 50)
+func=lambda x: np.sin(np.dot(10.0, x))+np.cos(np.dot(3.0, x))
+f1=func(x)
+plt.figure(1)
+plt.plot(x,f1, 'ro-')
+plt.grid()
