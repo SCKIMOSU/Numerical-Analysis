@@ -41,11 +41,11 @@ def bisect(func, xl, xu):
 
     return root, fx, ea, iter
 
-
-fm=lambda m: np.sqrt(9.81*m/0.25)*np.tanh(np.sqrt(9.81*0.25/m)*4)-36
-root, fx, ea, iter=bisect(fm, 40, 200)
-
-print('root = ', root, '(Bisection)')
-print('f(root) = ', fx, '(must be zero, Bisection)')
-print('estimated error= ', ea, '(must be zero error, Bisection)')
-print('iterated number to find root =', iter, '(Bisection)')
+if __name__ == '__main__':
+    
+    fm=lambda m: np.sqrt(9.81*m/0.25)*np.tanh(np.sqrt(9.81*0.25/m)*4)-36
+    root, fx, ea, iter=bisect(fm, 40, 200)
+    print('root = ', root, '(Bisection)')
+    print('f(root) = ', fx, '(must be zero, Bisection)')
+    print('estimated error= ', ea, '(must be zero error, Bisection)')
+    print('iterated number to find root =', iter, '(Bisection)')
