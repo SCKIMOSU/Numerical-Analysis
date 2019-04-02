@@ -46,15 +46,15 @@ def falseposition(func, xl, xu):
 #root= 142.73765563964844
 #      142.73763311
 
+if __name__ == '__main__':
 
-fm=lambda m: np.sqrt(9.81*m/0.25)*np.tanh(np.sqrt(9.81*0.25/m)*4)-36
+    fm=lambda m: np.sqrt(9.81*m/0.25)*np.tanh(np.sqrt(9.81*0.25/m)*4)-36
+    root, fx, ea, iter=falseposition(fm, 40, 200)
 
-root, fx, ea, iter=falseposition(fm, 40, 200)
-
-print('root=', root)
-print('f(root)=', fx)
-print('ea=', ea)
-print('iter=', iter)
+    print('root=', root)
+    print('f(root)=', fx)
+    print('ea=', ea)
+    print('iter=', iter)
 
 
 '''''''''false position
@@ -71,9 +71,3 @@ f(root)= 4.60891321552e-07
 ea= 5.3450468252827136e-05
 iter= 21
 '''''''''
-
-
-
-
-
-
