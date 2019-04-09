@@ -1,24 +1,18 @@
 import numpy as np
 
 def bisect(func, xl, xu):
-    maxit=100
-    es=1.0e-4
-
+    maxit=100; es=1.0e-4
     test=func(xl)*func(xu)
 
     if test > 0:
         print('No sign change')
         return [], [], [], []
 
-    iter=0
-    xr=xl
-
-    ea=100
+    iter=0; xr=xl; ea=100
 
     while (1):
         xrold=xr
         xr=np.float((xl+xu)/2)
-
         iter=iter+1
 
         if xr != 0:
