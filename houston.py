@@ -26,7 +26,6 @@ Y = df['Price']
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test =train_test_split(X,Y,test_size=0.4,random_state=101)
 
-
 # now we have to import linear regression model
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression() # instantiating the linear model
@@ -42,12 +41,15 @@ predictions = lm.predict(X_test)
 predictions # contains predicted values
 Y_test # contains real values
 # let's see the result on scatter plot
+plt.figure(1)
 plt.scatter(Y_test, predictions)
+plt.show()
 
 # As we are getting a straight line which means we did pretty good job.
 # Let's create a histogram :
-
+plt.figure(2)
 sns.distplot((Y_test-predictions))
+plt.show()
 
 from sklearn import metrics
 np.sqrt(metrics.mean_squared_error(Y_test, predictions))
