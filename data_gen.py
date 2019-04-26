@@ -14,3 +14,12 @@ y_data=[v[1] for v in vectors_set]
 
 plt.plot(x_data, y_data, 'ro')
 plt.show()
+
+p1=np.polyfit(x_data, y_data, 1)
+plt.plot(x_data, np.polyval(p1, x_data), 'b*-')
+
+p2=np.polyfit(x_data, y_data, 2)
+plt.plot(x_data, np.polyval(p2, x_data), 'k>-')
+
+p3=np.polyfit(x_data, y_data, 3)
+plt.plot(x_data, np.polyval(p3, x_data), 'md-')
