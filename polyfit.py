@@ -1,4 +1,4 @@
-# in order to how to use polyfit mothod in numoy 
+# in order to how to use polyfit mothod in numpy 
 import numpy as np
 import matplotlib.pyplot as plt
 x=np.array([0,1,2,3,4,5])
