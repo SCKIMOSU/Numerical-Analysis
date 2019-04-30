@@ -1,7 +1,8 @@
 import tensorflow as tf
+import numpy as np
 
-X = [1., 2., 3.]
-Y = [1., 2., 3.]
+X = np.array([1., 2., 3.])
+Y = np.array([1., 2., 3.])
 m = len(X)
 
 W = tf.placeholder(tf.float32)
