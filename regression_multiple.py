@@ -7,8 +7,9 @@ xp=np.linspace(0, 5, 100)
 
 p2=np.polyfit(x, y, 2)
 plt.figure(11)
-plt.plot(x, y, 'ro-', x, np.polyval(p2, x), 'b*-')
+plt.plot(x, y, 'ro', x, np.polyval(p2, x), 'b*-')
 plt.grid()
+plt.legend(['Data', 'Curve Fitting by Polynomial Regression np.polyval(p2, x)'])
 
 a=np.array([[6, 15, 55], [15, 55, 225], [55, 225, 979]])
 b=np.array([152.6, 585.6, 2488.8])
