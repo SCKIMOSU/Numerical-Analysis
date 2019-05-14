@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 구간 [0,4*pi]에 사인 곡선을 따라 균일한 간격의 점 100개를 생성합니다.
+# 구간 [0,4*pi]에 사인 곡선을 따라 균일한 간격의 점 10개를 생성합니다.
 x = np.linspace(0,4*np.pi,10)
 y=np.sin(x)
 
