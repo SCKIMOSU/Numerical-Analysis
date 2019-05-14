@@ -18,3 +18,4 @@ x1 = np.linspace(0, 4*np.pi)
 y1 = np.polyval(p,x1)s
 plt.figure(2)
 plt.plot(x, y, x1, y1, 'r*')
+plt.grid() 
