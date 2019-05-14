@@ -15,7 +15,7 @@ p = np.polyfit(x,y,7)
 
 # 좀 더 촘촘한 그리드에서 다항식을 계산하고 결과를 플로팅합니다.
 x1 = np.linspace(0, 4*np.pi)
-y1 = np.polyval(p,x1)s
+y1 = np.polyval(p,x1)
 plt.figure(2)
 plt.plot(x, y, x1, y1, 'r*')
 plt.grid() 
