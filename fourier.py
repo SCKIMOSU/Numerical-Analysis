@@ -304,3 +304,22 @@ for loop in np.arange(1, 10, 1):
     sqwave = sqwave+(1/c1)*np.sin(c1*2*np.pi*ff1*t)
     # fourier series
     plt.plot(t, sqwave)
+    
+############################   
+# cos() 홀수 정현파 더하기 --> 넓은 삼각형파 만들기
+
+
+Fs = 150.0  # sampling rate
+Ts = 1.0/Fs # sampling interval
+t = np.arange(0, 1, Ts)  # time vector
+ff1 = 5
+sqwave=0
+c1=1
+plt.figure(303)
+for loop in np.arange(1, 10, 1):
+    sqwave = sqwave+(1/c1)*np.cos(c1*2*np.pi*ff1*t)
+    # fourier series
+    plt.plot(t, sqwave)
+    c1=c1+2
+    plt.pause(3)
+    
