@@ -15,8 +15,8 @@ def incsearch(func, xmin, xmax, ns):
     xb=xbt.reshape(nb, 2)
     return nb, xb
 
-def draw():
-    x = np.linspace(3, 6, 50)
+def draw(xmin, xmax, inc):
+    x = np.linspace(xmin, xmax, inc)
     func = lambda x: np.sin(np.dot(10.0, x)) + np.cos(np.dot(3.0, x))
     f1 = func(x)
     plt.figure(1)
@@ -28,8 +28,9 @@ def draw():
 if __name__ == '__main__':
 
     xmin=3; xmax=6
+    inc=100
     func=lambda x: np.sin(np.dot(10.0, x))+np.cos(np.dot(3.0, x))
-    nb, xb=incsearch(func, 3, 6, 50)
-    draw()
+    nb, xb=incsearch(func, xmin, xmax, inc)
+    draw(xmin, xmax, inc)
     print('number of brackets= ', nb)
     print('root interval=', xb)
