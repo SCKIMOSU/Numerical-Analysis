@@ -22,6 +22,7 @@ def draw():
     plt.figure(1)
     plt.plot(x, f1, 'ro-')
     plt.grid()
+    plt.show()
 
 
 if __name__ == '__main__':
