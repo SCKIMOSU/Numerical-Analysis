@@ -10,7 +10,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 #matplotlib inline
 # df = pd.read_csv(r'C:\Users\Richie Rich\Desktop\Data Files\USA_Housing.csv')
-df = pd.read_csv(r'C:\Users\sckMac\PycharmProjects\class1\USA_Housing.csv')
+# df = pd.read_csv(r'C:\Users\sckMac\PycharmProjects\class1\USA_Housing.csv')
+df = pd.read_csv(r'/home/sckubuntu/다운로드/USA_Housing.csv')
+
 df.info()
 df.describe()
 df.head(10)
