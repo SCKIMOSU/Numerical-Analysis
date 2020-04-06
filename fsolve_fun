@@ -1,0 +1,19 @@
+import numpy as np
+from scipy.optimize import fsolve
+import matplotlib.pyplot as plt
+
+def func(x):
+    return x + 2 * np.cos(x)
+
+def func2(x):
+    out = [x[0] * np.cos(x[1]) - 4]
+    out.append(x[1] * x[0] - x[1] - 5)
+    return out
+
+x0 = fsolve(func, 0.3) # 시작점을 준 경우 --> 개방법
+print(x0)
+#-1.02986652932
+
+x02 = fsolve(func2, [1, 1]) # 시작점들을 준 경우  -> 개방법
+print(x02)
+# [ 6.5041  0.9084]
