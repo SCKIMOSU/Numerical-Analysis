@@ -1,0 +1,10 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+ea=np.array([66.7, 25, 14.3, 6.7, 3.45, 1.75])
+et=np.array([15.9, 12, 1.9, 5.1, 1.6, 0.016])
+x=np.arange(1, 7)
+plt.plot(x, ea, 'ro-', x, et, 'bx-')
+plt.grid()
+plt.legend(["Approximate Error", "True Error"])
+plt.show()
