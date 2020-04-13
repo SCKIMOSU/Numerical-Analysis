@@ -1,4 +1,6 @@
 import numpy as np
+from scipy.optimize import fsolve
+
 
 
 def sech(x):
@@ -36,3 +38,8 @@ if __name__ == '__main__':
     print('f(root weight, should be zero) =', fx)
     print('ea = should be less than 1.0e-4', ea)
     print('iter =', iter)
+
+    fm = lambda m: np.sqrt(9.81 * m / 0.25) * np.tanh(np.sqrt(9.81 * 0.25 / m) * 4) - 36
+    m = fsolve(fm, 1)
+    print("Real Root= ", m)
+
