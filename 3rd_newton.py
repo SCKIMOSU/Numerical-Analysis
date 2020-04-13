@@ -20,6 +20,10 @@ x=fsolve(fx, 1)
 print("Real Root= ", x)
 
 
+
+
+
+
 def newton_raphson(func, dfunc, xr):
    maxit=50
    es=1.0e-5
@@ -44,5 +48,11 @@ if __name__ == '__main__':
     print('f(root weight, should be zero) =', fx)
     print('ea = should be less than 1.0e-4', ea)
     print('iter =', iter)
+
+    p = [3, -18, 24]
+    xd1 = np.roots(p)
+    print('xd1 =', xd1) 
+
+
 
 
