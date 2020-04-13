@@ -26,7 +26,7 @@ def newton_raphson(func, dfunc, xr):
     return root, fx, ea, iter
 
 if __name__ == '__main__':
-    g = 9.81; cd = 0.25; v = 36; t = 4;
+    g = 9.81; cd = 0.25; v = 36; t = 4
     fp = lambda m: np.sqrt(g * m / cd) * np.tanh(np.sqrt(g * cd / m) * t) - v
     dfp = lambda m: (1 / 2) * np.sqrt(g / (m * cd)) * np.tanh(np.sqrt(g * cd / m) * t) - g * t / (2 * m) * (
     sech(np.sqrt(g * cd / m) * t)) ** 2
