@@ -120,7 +120,7 @@ plt.xlabel('normal distribution')
 plt.ylabel('cdf')
 plt.show()
 
-# cdf에 대한 시각화 
+#plt.plot()으로 cdf시각화 
 plt.figure(13)
 #plt.subplot(1, 2, 2)
 plt.plot(bin_left[:-1], cdf, 'ro-')
@@ -129,3 +129,14 @@ plt.xlabel('normal distribution')
 plt.ylabel('cdf')
 plt.grid()
 plt.show()
+
+#plt.semilogy()로 cdf시각화 
+plt.figure(14)
+#plt.subplot(1, 2, 2)
+plt.semilogy(bin_left[:-1], cdf, 'b*-')
+plt.title('cdf')
+plt.xlabel('normal distribution')
+plt.ylabel('cdf')
+plt.grid()
+plt.show()
+
