@@ -64,4 +64,10 @@ plt.ylabel('pdf')
 plt.grid()
 
 
-
+plt.figure(9)
+plt.plot(bins_left, pdf, 'b*-')
+plt.title('pdf')
+plt.xlabel('s')
+plt.ylabel('pdf')
+plt.grid()
+plt.show()
