@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 s=np.random.uniform(6, 7, 25)
 smin=s.min()
 smax=s.max()
@@ -9,8 +10,9 @@ first_left=smin
 second_left=smin+bin_width
 third_left=smin+bin_width*2
 fourth_left=smin+bin_width*3
-fifth_left=smin+bin_width*4 
+fifth_left=smin+bin_width*4
 
+bins_left=np.array([first_left, second_left, third_left, fourth_left ])
 
 first_height=np.size(np.where( (s < second_left) & ( s>= first_left) ))
 second_height=np.size(np.where( (s < third_left) & ( s>= second_left) ))
@@ -22,7 +24,7 @@ plt.figure(1)
 plt.subplot(2,1,1)
 plt.bar(bins_left, bins_height, width = bin_width)
 plt.grid()
-plt.show()
+
 plt.subplot(2,1,2)
 plt.bar(bins_left, bins_height, width = bin_width-0.05)
 plt.grid()
