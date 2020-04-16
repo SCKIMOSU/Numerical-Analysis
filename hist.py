@@ -84,3 +84,16 @@ plt.ylabel('cdf')
 plt.grid()
 plt.show()
 
+
+# 더 많은 데이터 셋에 대해 확률 밀도 함수를 적용 
+x3=np.random.randn(10000)
+plt.figure(11)
+plt.subplot(2, 1, 1)
+n3, bins3, patches3 = plt.hist(x3, bins=50, color='b', alpha=0.75)
+plt.title('Histrogram')
+plt.ylabel('Count')
+plt.subplot(2, 1, 2)
+n4, bins4, patches4 = plt.hist(x3, 50, normed=1, facecolor='b', alpha=0.75)
+plt.xlabel('Probability Density Function')
+plt.ylabel('Probability')
+
