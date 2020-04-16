@@ -1,6 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+mid=np.array([80, 70, 60, 90])
+avg=mid.mean()
+var=mid.var()
+sd=np.sqrt(var)
+var1=((mid[0]-avg)**2+(mid[1]-avg)**2+(mid[2]-avg)**2+(mid[3]-avg)**2)/4
+np.sqrt(mid.var())
+np.sqrt(var1)
+
+
 plt.figure(1)
 n1=np.random.randn(10)
 u=np.random.uniform(-1, 1, 10)
