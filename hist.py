@@ -120,3 +120,12 @@ plt.xlabel('normal distribution')
 plt.ylabel('cdf')
 plt.show()
 
+# cdf에 대한 시각화 
+plt.figure(13)
+#plt.subplot(1, 2, 2)
+plt.plot(bin_left[:-1], cdf, 'ro-')
+plt.title('cdf')
+plt.xlabel('normal distribution')
+plt.ylabel('cdf')
+plt.grid()
+plt.show()
