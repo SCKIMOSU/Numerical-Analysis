@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 s=np.random.uniform(6, 7, 25)
 smin=s.min()
 smax=s.max()
