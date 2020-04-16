@@ -97,3 +97,26 @@ n4, bins4, patches4 = plt.hist(x3, 50, normed=1, facecolor='b', alpha=0.75)
 plt.xlabel('Probability Density Function')
 plt.ylabel('Probability')
 
+
+# 더 많은 데이터 셋에 대해 plt.bar()함수로 확률 밀도 함수 구현   
+nd=np.random.randn(10000)
+ra=np.int(np.floor(np.min(nd)))
+rb=np.int(np.ceil(np.max(nd)))
+hist, bin_left=np.histogram(nd, bins=np.arange(ra, rb+1, 1))
+bin_width=(rb-ra)/np.size(bin_left)
+pdf=hist/np.size(nd)
+cdf=np.cumsum(pdf)
+plt.figure(12)
+plt.subplot(1, 2, 1)
+plt.bar(bin_left[:-1], pdf, bin_width)
+plt.title('pdf')
+plt.xlabel('normal distribution')
+plt.ylabel('pdf')
+
+plt.subplot(1, 2, 2)
+plt.bar(bin_left[:-1], cdf, bin_width, facecolor='m')
+plt.title('cdf')
+plt.xlabel('normal distribution')
+plt.ylabel('cdf')
+plt.show()
+
