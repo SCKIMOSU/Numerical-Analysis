@@ -48,3 +48,20 @@ plt.hist(s, bins=4, color='c', alpha=0.75)
 plt.title('Histrogram')
 plt.ylabel('Count')
 plt.grid()
+
+# Probability Density Function (확률밀도함수)
+pdf=bins_height/np.size(s)
+plt.figure(8)
+plt.subplot(2, 1, 1)
+plt.hist(s, bins=4, color='c', alpha=0.75)
+plt.title('Histrogram')
+plt.ylabel('Count')
+plt.grid()
+plt.subplot(2, 1, 2)
+plt.bar(bins_left, pdf, bin_width)
+plt.title('Bar')
+plt.ylabel('pdf')
+plt.grid()
+
+
+
