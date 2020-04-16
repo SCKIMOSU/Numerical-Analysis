@@ -26,3 +26,20 @@ plt.hist(n1, 100, normed=1)
 plt.hist(n2, 100, normed=1)
 plt.hist(n3, 100, normed=1)
 plt.hist(n4, 100, normed=1)
+
+# draw histogram
+import numpy as np
+import matplotlib.pyplot as plt
+nd=np.random.randn(10)
+ud=np.random.uniform(-1, 1, 10)
+plt.figure(1)
+plt.subplot(2, 1, 1)
+plt.hist(nd, 4)
+plt.title('Normal and Uniform')
+plt.ylabel('Normal')
+plt.grid()
+plt.subplot(2, 1, 2)
+plt.hist(ud, 4)
+plt.ylabel('Uniform')
+plt.grid()
+plt.show()
