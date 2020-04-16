@@ -43,3 +43,6 @@ plt.hist(ud, 4)
 plt.ylabel('Uniform')
 plt.grid()
 plt.show()
+print("count = " , count, "\nbin_left= ", bin_left)
+print("\ncount1 = " , count1, "\nbin_left1= ", bin_left1)
+
