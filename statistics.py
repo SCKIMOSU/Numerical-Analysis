@@ -13,9 +13,11 @@ np.sqrt(var1)
 plt.figure(1)
 n1=np.random.randn(10)
 u=np.random.uniform(-1, 1, 10)
+u1=np.random.rand(10)
+
 plt.plot(n1,'o:')
 plt.plot(u, '*:')
-
+plt.plot(u1, '.:')
 
 n1=np.random.randn(10000)
 c1=np.size(np.where((n1>=-1) & (n1<=1) ))
@@ -39,9 +41,11 @@ plt.hist(n4, 100, normed=1)
 # draw histogram
 import numpy as np
 import matplotlib.pyplot as plt
+
+
 nd=np.random.randn(10)
 ud=np.random.uniform(-1, 1, 10)
-plt.figure(1)
+plt.figure(3)
 plt.subplot(2, 1, 1)
 plt.hist(nd, 4)
 plt.title('Normal and Uniform')
@@ -52,6 +56,8 @@ plt.hist(ud, 4)
 plt.ylabel('Uniform')
 plt.grid()
 plt.show()
+
 print("count = " , count, "\nbin_left= ", bin_left)
 print("\ncount1 = " , count1, "\nbin_left1= ", bin_left1)
+
 
