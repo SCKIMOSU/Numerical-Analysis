@@ -11,9 +11,9 @@ np.sqrt(var1)
 
 
 plt.figure(1)
-n1=np.random.randn(10)
-u=np.random.uniform(-1, 1, 10)
-u1=np.random.rand(10)
+n1=np.random.randn(10) # 정규분포
+u=np.random.uniform(-1, 1, 10) # 균등분포
+u1=np.random.rand(10) # 균등분포  
 
 plt.plot(n1,'o:')
 plt.plot(u, '*:')
@@ -59,5 +59,3 @@ plt.show()
 
 print("count = " , count, "\nbin_left= ", bin_left)
 print("\ncount1 = " , count1, "\nbin_left1= ", bin_left1)
-
-
