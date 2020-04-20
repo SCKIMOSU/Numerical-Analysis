@@ -28,8 +28,8 @@ bins_height=np.array([first_height, second_height, third_height, fourth_height])
 
 plt.figure(6)
 plt.subplot(2,1,1)
-plt.bar(bins_left, bins_height, width = bin_width)
-# 콘솔 디버깅 (plt.bar(x) ) 시 주의 사항 
+plt.bar(bins_left, bins_height, width = bin_width)\
+# 콘솔 디버깅 (plt.bar(x) 시 주의 사항 )
 # plt.bar(x, height, width)
 # x=bins_left 를 의미함  *****
 # height=bins_height 를 의미함
@@ -55,7 +55,14 @@ plt.title('Histrogram')
 plt.ylabel('Count')
 plt.grid()
 
-# Probability Density Function (확률밀도함수)
+# 이산신호: Probability Mass Function (pmf: 확률질량함수)
+# s : 25개는 이산신호로 pmf를 사용하는 것이 맞음
+# 연속신호: Probability Density Function (pdf: 확률밀도함수)
+# 그러나, s 가 무한대의 수로 가게 되면 이산신호가
+# 아니고 연속신호가 됨으로 pdf를 사용함
+# 수치해석에서는 이산/연속 구분하지 않고 pdf를 사용해서
+# cdf로 연관시킬 예정임
+
 pdf=bins_height/np.size(s)
 plt.figure(8)
 plt.subplot(2, 1, 1)
