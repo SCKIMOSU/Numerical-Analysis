@@ -23,12 +23,18 @@ bins_left=np.array([first_left, second_left, third_left, fourth_left ])
 first_height=np.size(np.where( (s < second_left) & ( s>= first_left) ))
 second_height=np.size(np.where( (s < third_left) & ( s>= second_left) ))
 third_height=np.size(np.where( (s < fourth_left) & ( s>= third_left) ))
-fourth_height=np.size(np.where( (s < fifth_left) & ( s>= fourth_left) ))
+fourth_height=np.size(np.where( (s <= fifth_left) & ( s>= fourth_left) ))
 bins_height=np.array([first_height, second_height, third_height, fourth_height])
 
 plt.figure(6)
 plt.subplot(2,1,1)
 plt.bar(bins_left, bins_height, width = bin_width)
+# 콘솔 디버깅 (plt.bar(x) ) 시 주의 사항 
+# plt.bar(x, height, width)
+# x=bins_left 를 의미함  *****
+# height=bins_height 를 의미함
+# width=bin_width 를 의미함
+
 plt.grid()
 
 plt.subplot(2,1,2)
@@ -85,7 +91,7 @@ plt.grid()
 plt.show()
 
 
-# 더 많은 데이터 셋에 대해 확률 밀도 함수를 적용 
+# 더 많은 데이터 셋에 대해 확률 밀도 함수를 적용
 x3=np.random.randn(10000)
 plt.figure(11)
 plt.subplot(2, 1, 1)
@@ -98,7 +104,7 @@ plt.xlabel('Probability Density Function')
 plt.ylabel('Probability')
 
 
-# 더 많은 데이터 셋에 대해 plt.bar()함수로 확률 밀도 함수 구현   
+# 더 많은 데이터 셋에 대해 plt.bar()함수로 확률 밀도 함수 구현
 nd=np.random.randn(10000)
 ra=np.int(np.floor(np.min(nd)))
 rb=np.int(np.ceil(np.max(nd)))
@@ -120,7 +126,7 @@ plt.xlabel('normal distribution')
 plt.ylabel('cdf')
 plt.show()
 
-#plt.plot()으로 cdf시각화 
+#plt.plot()으로 cdf시각화
 plt.figure(13)
 #plt.subplot(1, 2, 2)
 plt.plot(bin_left[:-1], cdf, 'ro-')
@@ -130,7 +136,7 @@ plt.ylabel('cdf')
 plt.grid()
 plt.show()
 
-#plt.semilogy()로 cdf시각화 
+#plt.semilogy()로 cdf시각화
 plt.figure(14)
 #plt.subplot(1, 2, 2)
 plt.semilogy(bin_left[:-1], cdf, 'b*-')
@@ -139,4 +145,3 @@ plt.xlabel('normal distribution')
 plt.ylabel('cdf')
 plt.grid()
 plt.show()
-
