@@ -62,7 +62,7 @@ plt.show()
 # plt.bar()와 plt.hist()를 이용한 히스토그램
 plt.figure(7)
 plt.subplot(2, 1, 1)
-plt.bar(bin_left, bin_height, bin_width)
+plt.bar(bins_left, bins_height, bin_width)
 plt.title('Bar')
 plt.ylabel('Count')
 plt.grid()
