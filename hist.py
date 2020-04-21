@@ -7,6 +7,7 @@ plt.figure(4)
 plt.hist(s,5)
 plt.figure(5)
 plt.hist(s,4, color='g')
+plt.grid()
 
 # plt.bar()히스토그램 그리기
 smin=s.min()
@@ -26,9 +27,25 @@ third_height=np.size(np.where( (s < fourth_left) & ( s>= third_left) ))
 fourth_height=np.size(np.where( (s <= fifth_left) & ( s>= fourth_left) ))
 bins_height=np.array([first_height, second_height, third_height, fourth_height])
 
+plt.figure(60)
+plt.subplot(2,1,1)
+plt.bar(bins_left+bin_width/2, bins_height, width = bin_width)
+plt.grid()
+plt.subplot(2,1,2)
+plt.bar(bins_left+bin_width/2, bins_height, width = bin_width-0.05)
+plt.grid()
+plt.show()
+
+# 콘솔 디버깅 (plt.bar(x) 시 주의 사항 )
+# plt.bar(x, height, width)
+# x=bins_left 를 의미함  *****
+# height=bins_height 를 의미함
+# width=bin_width 를 의미함
+
+
 plt.figure(6)
 plt.subplot(2,1,1)
-plt.bar(bins_left, bins_height, width = bin_width)\
+plt.bar(bins_left, bins_height, width = bin_width)
 # 콘솔 디버깅 (plt.bar(x) 시 주의 사항 )
 # plt.bar(x, height, width)
 # x=bins_left 를 의미함  *****
@@ -45,7 +62,7 @@ plt.show()
 # plt.bar()와 plt.hist()를 이용한 히스토그램
 plt.figure(7)
 plt.subplot(2, 1, 1)
-plt.bar(bins_left, bins_height, bin_width)
+plt.bar(bin_left, bin_height, bin_width)
 plt.title('Bar')
 plt.ylabel('Count')
 plt.grid()
