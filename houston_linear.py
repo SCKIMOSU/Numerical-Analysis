@@ -12,7 +12,13 @@ import matplotlib.pyplot as plt
 # df = pd.read_csv(r'C:\Users\Richie Rich\Desktop\Data Files\USA_Housing.csv')
 # df = pd.read_csv(r'C:\Users\sckMac\PycharmProjects\class1\USA_Housing.csv')
 #df = pd.read_csv(r'/home/sckubuntu/다운로드/USA_Housing.csv')
-df = pd.read_csv(r'USA_Housing.csv')
+#df = pd.read_csv(r'USA_Housing.csv')
+#data = pd.read_csv('file1.csv', error_bad_lines=False)
+
+#df = pd.read_csv(r'USA_Housing.csv', error_bad_lines=False)
+#data=pd.read_csv("File_path", sep='\t')
+
+df=pd.read_csv(r'USA_Housing.csv', sep='\t')
 
 df.info()
 df.describe()
@@ -80,3 +86,4 @@ plt.show()
 
 from sklearn import metrics
 np.sqrt(metrics.mean_squared_error(Y_test, predictions))
+
