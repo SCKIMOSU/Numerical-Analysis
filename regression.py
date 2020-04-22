@@ -20,6 +20,7 @@ p2=np.polyfit(x, y, 2)
 # array([-0.16071429,  0.50071429,  0.22142857])
 p3=np.polyfit(x, y, 3)
 # array([ 0.08703704, -0.81349206,  1.69312169, -0.03968254])
+p4=np.polyfit(x, y, 4) # new in 2020/4/22
 
 
 plt.figure(1)
@@ -37,6 +38,7 @@ plt.plot(x,y, 'o')
 plt.plot(x, np.polyval(p1,x), 'r*-')
 plt.plot(x, np.polyval(p2,x), 'b>-')
 plt.plot(x, np.polyval(p3,x), 'mx-')
+plt.plot(x, np.polyval(p4,x), 'go-') 
 
 
 plt.figure(4)
@@ -53,6 +55,8 @@ plt.plot(xp, np.polyval(p2,xp), 'b--') # --: dached line
 # np.polyval(p2,x)=array([ 0.22142857,0.58, 0.27714286, -0.34714286, - 1.29285714])
 
 plt.plot(xp, np.polyval(p3,xp), 'm:')
+plt.plot(xp, np.polyval(p4,xp), 'g.')
+
 
 
 #  new example
