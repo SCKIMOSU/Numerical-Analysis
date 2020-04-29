@@ -75,9 +75,9 @@ def Data_Learning(x_data, y_data):
         #plt.legend()
         plt.show()
 
-    W_data = [t[0] for t in train_set]
-    v_data = [t[1] for t in train_set]
-    Loss_data= [t[2] for t in train_set]
+    W_data = np.array([t[0] for t in train_set])
+    v_data = np.array([t[1] for t in train_set])
+    Loss_data= np.array([t[2] for t in train_set])
 
     return W_data,v_data, Loss_data
 
