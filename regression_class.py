@@ -9,15 +9,20 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 
 def Data_Genearion(num_points):
-    #num_points = 50
+
+    num_points = 50
     vectors_set = []
     for i in np.arange(num_points):
         x = np.random.normal(2, 2) + 10
         y = x * 5 + (np.random.normal(0, 3)) * 2
         vectors_set.append([x, y])
+        # print(np.round(vectors_set, 1))
+        # print(np.round(y, 1))
 
-    x_data = [v[0] for v in vectors_set]
-    y_data = [v[1] for v in vectors_set]
+    x_data = np.array([v[0] for v in vectors_set])
+    y_data = np.array([v[1] for v in vectors_set])
+    # print(np.round(x_data, 1))
+    # print(np.round(y_data, 1))
 
     return  x_data, y_data
 
@@ -35,9 +40,20 @@ def Data_Draw(x_data, y_data):
 
 def Data_Learning(x_data, y_data):
     W = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+    # init = tf.initialize_all_variables()
+    # sess = tf.Session()
+    # sess.run(init)
+    # sess.run(W)
+    # print('sess.run(W)= ', sess.run(W))
+    # array([0.05211711], dtype=float32)
     b = tf.Variable(tf.zeros([1]))
+    # sess.run(b)
+    # array([0.], dtype=float32)
     y = W * x_data + b
+    # sess.run(y)
+    # print(np.round(sess.run(y),1))
     loss = tf.reduce_mean(tf.square(y - y_data))
+    # print(np.round(sess.run(loss),1))
     #lo.append(loss)
     optimizer = tf.train.GradientDescentOptimizer(0.0015)
     train = optimizer.minimize(loss)
