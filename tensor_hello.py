@@ -1,4 +1,7 @@
 import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 def hello():
     a = tf.constant('hello, tensorflow!')
     print(a)  # Tensor("Const:0", shape=(), dtype=string)
