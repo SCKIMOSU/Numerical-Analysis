@@ -1,4 +1,7 @@
 # https://github.com/rickiepark/first-steps-with-tensorflow/blob/master/special_notes/Gradients.ipynb 
+
+# https://icim.nims.re.kr/post/easyMath/70
+# Learning rate가 0.5인 경우(발산) 
 # 방정식 2*x = 10 을 만족하는 x 찾기
 # x 초깃값 = 0
 
