@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 X = np.array([1., 2., 3.])
 Y = np.array([1., 2., 3.])
@@ -31,3 +32,9 @@ for i in range(-30, 50):
     cost_val.append(yPos)
 
 sess.close()
+
+
+plt.plot(W_val, cost_val)
+plt.show()
+
+
