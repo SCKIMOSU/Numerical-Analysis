@@ -35,6 +35,8 @@ sess.close()
 
 
 plt.plot(W_val, cost_val)
+plt.xlabel('W')
+plt.ylabel('cost')
+plt.grid()
 plt.show()
-
 
