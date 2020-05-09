@@ -54,3 +54,26 @@ plt.xlabel("$x$")
 plt.ylabel("$y$")
 plt.title("2차원 로젠브록 함수 $f(x,y)$", fontdict=font3)
 plt.show()
+
+# https://frhyme.github.io/python-lib/python_contour/
+
+Xmesh, Ymesh = np.meshgrid(np.linspace(-3.0, 3.0, 1000),
+                     np.linspace(-3.0, 3.0, 1000)
+                    )
+# levels = np.linspace(Z.reshape(-1, 1).min(), Z.reshape(-1, 1).max(), 50)
+# np.size(levels) = 50
+print("XX.shape: {}".format(Xmesh.shape))
+print("YY.shape: {}".format(Ymesh.shape))
+Z = np.sqrt(Xmesh**2 + Ymesh**2 )
+
+plt.figure(figsize=(12, 5))
+"""levels에 구간을 넣어줘서 등고선 표시 위치를 정할 수 있습니다. 
+"""
+cp = plt.contourf(Xmesh, Ymesh, Z,
+                 levels = np.linspace(Z.reshape(-1, 1).min(), Z.reshape(-1, 1).max(), 50)
+                )
+plt.colorbar(cp)
+#plt.savefig('../../assets/images/markdown_img/draw_contour_20180529_1727.svg')
+plt.savefig('draw_contour.svg')
+plt.show()
+
