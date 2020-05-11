@@ -1,4 +1,5 @@
 
+import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -105,6 +106,11 @@ plt.plot(x, f1(x), 'go', markersize=10)
 #plt.show()
 plt.text(x + 0.1, f1(x) + 0.1, "1차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
+# f1(x)에서 접선 긋기
+# f1d(x) * (xx[0] - x) + f1(x)   : 10
+# f1d(x) * (xx[1] - x) + f1(x)  : 9.8
+# f1d(x) * (xx[2] - x) + f1(x)  : 9.6
+# f1d(x) * (xx[99] - x) + f1(x) : -10
 print("1차 시도: x_1 = {:.2f}, g_1 = {:.2f}".format(x, f1d(x)))
 
 # k = 1
@@ -237,5 +243,4 @@ plt.xlabel("x")
 plt.ylabel("y")
 plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" )
 plt.show()
-
 
