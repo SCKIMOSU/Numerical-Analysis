@@ -36,6 +36,8 @@ for i in range(-30, 50):
 
 sess.close()
 
+#np.where(np.round(cost_val, 2) == 0.0)
+#W_val[40]
 
 plt.plot(W_val, cost_val)
 plt.xlabel('W')
