@@ -1,5 +1,4 @@
 
-import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -39,53 +38,6 @@ plt.ylabel("$f_1(x)$")
 plt.title("1차원 목적함수")
 #plt.title("cost function")
 plt.show()
-
-
-def f2(x, y):
-    return (1 - x)**2 + 100.0 * (y - x**2)**2
-
-xx = np.linspace(-4, 4, 800)
-yy = np.linspace(-3, 3, 600)
-X, Y = np.meshgrid(xx, yy)
-Z = f2(X, Y)
-
-levels=np.logspace(-1, 3, 10)
-plt.contourf(X, Y, Z, alpha=0.2, levels=levels)
-plt.contour(X, Y, Z, colors="gray",
-            levels=[0.4, 3, 15, 50, 150, 500, 1500, 5000])
-plt.plot(1, 1, 'ro', markersize=10)
-
-plt.xlim(-4, 4)
-plt.ylim(-3, 3)
-plt.xticks(np.linspace(-4, 4, 9))
-plt.yticks(np.linspace(-3, 3, 7))
-plt.xlabel("$x$")
-plt.ylabel("$y$")
-plt.title("2차원 로젠브록 함수 $f(x,y)$")
-plt.show()
-
-# https://frhyme.github.io/python-lib/python_contour/
-
-Xmesh, Ymesh = np.meshgrid(np.linspace(-3.0, 3.0, 1000),
-                     np.linspace(-3.0, 3.0, 1000)
-                    )
-# levels = np.linspace(Z.reshape(-1, 1).min(), Z.reshape(-1, 1).max(), 50)
-# np.size(levels) = 50
-print("XX.shape: {}".format(Xmesh.shape))
-print("YY.shape: {}".format(Ymesh.shape))
-Z = np.sqrt(Xmesh**2 + Ymesh**2 )
-
-plt.figure(figsize=(12, 5))
-"""levels에 구간을 넣어줘서 등고선 표시 위치를 정할 수 있습니다. 
-"""
-cp = plt.contourf(Xmesh, Ymesh, Z,
-                 levels = np.linspace(Z.reshape(-1, 1).min(), Z.reshape(-1, 1).max(), 50)
-                )
-plt.colorbar(cp)
-#plt.savefig('../../assets/images/markdown_img/draw_contour_20180529_1727.svg')
-plt.savefig('draw_contour.svg')
-plt.show()
-
 
 
 def f1d(x):
@@ -174,8 +126,58 @@ plt.ylabel("$f_1(x)$")
 plt.title("최대경사법을 사용한 1차함수의 최적화 (스텝 사이즈가 너무 큰 경우)")
 plt.show()
 
+
+# 2차원 로젠브록 함수
+def f2(x, y):
+    return (1 - x)**2 + 100.0 * (y - x**2)**2
+
+xx = np.linspace(-4, 4, 800)
+yy = np.linspace(-3, 3, 600)
+X, Y = np.meshgrid(xx, yy)
+Z = f2(X, Y)
+
+levels=np.logspace(-1, 3, 10)
+plt.contourf(X, Y, Z, alpha=0.2, levels=levels)
+plt.contour(X, Y, Z, colors="gray",
+            levels=[0.4, 3, 15, 50, 150, 500, 1500, 5000])
+plt.plot(1, 1, 'ro', markersize=10)
+
+plt.xlim(-4, 4)
+plt.ylim(-3, 3)
+plt.xticks(np.linspace(-4, 4, 9))
+plt.yticks(np.linspace(-3, 3, 7))
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("2차원 로젠브록 함수 $f(x,y)$")
+plt.show()
+
+# https://frhyme.github.io/python-lib/python_contour/
+
+Xmesh, Ymesh = np.meshgrid(np.linspace(-3.0, 3.0, 1000),
+                     np.linspace(-3.0, 3.0, 1000)
+                    )
+# levels = np.linspace(Z.reshape(-1, 1).min(), Z.reshape(-1, 1).max(), 50)
+# np.size(levels) = 50
+print("XX.shape: {}".format(Xmesh.shape))
+print("YY.shape: {}".format(Ymesh.shape))
+Z = np.sqrt(Xmesh**2 + Ymesh**2 )
+
+plt.figure(figsize=(12, 5))
+"""levels에 구간을 넣어줘서 등고선 표시 위치를 정할 수 있습니다. 
+"""
+cp = plt.contourf(Xmesh, Ymesh, Z,
+                 levels = np.linspace(Z.reshape(-1, 1).min(), Z.reshape(-1, 1).max(), 50)
+                )
+plt.colorbar(cp)
+#plt.savefig('../../assets/images/markdown_img/draw_contour_20180529_1727.svg')
+plt.savefig('draw_contour.svg')
+plt.show()
+
+
 def f2g(x, y):
     """f2(x, y)의 도함수"""
+    # 2차원 로젠브록 함수의 도함수
+    # (1 - x)**2 + 100.0 * (y - x**2)**2
     return np.array((2.0 * (x - 1) - 400.0 * x * (y - x**2), 200.0 * (y - x**2)))
 
 #다음 그림에  x=−1,y−1 에서 시작하여
@@ -243,4 +245,3 @@ plt.xlabel("x")
 plt.ylabel("y")
 plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" )
 plt.show()
-
