@@ -1,6 +1,13 @@
-import tensorflow as tf
+
 import numpy as np
 import matplotlib.pyplot as plt
+
+plt.rc('font', family='Malgun Gothic')
+plt.rc('axes', unicode_minus=False)
+# 그런데 보통 한글 글꼴에는 유니코드 마이너스(−)가 없고
+# 일반 마이너스(-) 기호만 있습니다.
+# 눈으로 보기에는 비슷해보이지만 다른 글자입니다.
+# 따라서 유니코드 마이너스 기호를 쓰지 않도록 설정해줍니다.
 
 font1={'family':'NanumMyeongjo','color':'black','size':	24}
 font2={'family':'NanumBarunpen','color':'darkred','weight':'bold', 'size':18}
@@ -28,7 +35,8 @@ plt.plot(2, 2, 'ro', markersize=10)
 plt.ylim(0, 10)
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
-plt.title("1차원 목적함수", fontdict=font3)
+plt.title("1차원 목적함수")
+#plt.title("cost function")
 plt.show()
 
 
@@ -52,7 +60,7 @@ plt.xticks(np.linspace(-4, 4, 9))
 plt.yticks(np.linspace(-3, 3, 7))
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.title("2차원 로젠브록 함수 $f(x,y)$", fontdict=font3)
+plt.title("2차원 로젠브록 함수 $f(x,y)$")
 plt.show()
 
 # https://frhyme.github.io/python-lib/python_contour/
@@ -95,27 +103,30 @@ mu = 0.4
 x = 0
 plt.plot(x, f1(x), 'go', markersize=10)
 #plt.show()
-plt.text(x + 0.1, f1(x) + 0.1, "1차 시도", fontdict=font3)
+plt.text(x + 0.1, f1(x) + 0.1, "1차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("1차 시도: x_1 = {:.2f}, g_1 = {:.2f}".format(x, f1d(x)))
 
 # k = 1
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 0.2, f1(x) + 0.4, "2차 시도" , fontdict=font3)
+plt.text(x - 0.2, f1(x) + 0.4, "2차 시도" )
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("2차 시도: x_2 = {:.2f}, g_2 = {:.2f}".format(x, f1d(x)))
 
 # k = 2
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 0.2, f1(x) - 0.7, "3차 시도", fontdict=font3)
+plt.text(x - 0.2, f1(x) - 0.7, "3차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("3차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
+
+
+
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
-plt.title("최대경사법을 사용한 1차함수의 최적화", fontdict=font3)
+plt.title("최대경사법을 사용한 1차함수의 최적화")
 plt.ylim(0, 10)
 plt.show()
 
@@ -133,28 +144,28 @@ mu = 1.1
 x = 0
 
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x + 0.2, f1(x) + 0.1, "1차 시도", fontdict=font3)
+plt.text(x + 0.2, f1(x) + 0.1, "1차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("1차 시도: x_1 = {:.2f}, g_1 = {:.2f}".format(x, f1d(x)))
 
 # k = 1
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x + 0.2, f1(x) + 0.4, "2차 시도", fontdict=font3)
+plt.text(x + 0.2, f1(x) + 0.4, "2차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("2차 시도: x_2 = {:.2f}, g_2 = {:.2f}".format(x, f1d(x)))
 
 # k = 2
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 1.2, f1(x) - 0.7, "3차 시도", fontdict=font3)
+plt.text(x - 1.2, f1(x) - 0.7, "3차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("3차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
 plt.ylim(0, 15)
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
-plt.title("최대경사법을 사용한 1차함수의 최적화 (스텝 사이즈가 너무 큰 경우)", fontdict=font3)
+plt.title("최대경사법을 사용한 1차함수의 최적화 (스텝 사이즈가 너무 큰 경우)")
 plt.show()
 
 def f2g(x, y):
@@ -193,7 +204,7 @@ plt.xticks(np.linspace(-3, 3, 7))
 plt.yticks(np.linspace(-2, 2, 5))
 plt.xlabel("x")
 plt.ylabel("y")
-plt.title("최대경사법을 사용한 2차함수의 최적화" , fontdict=font3)
+plt.title("최대경사법을 사용한 2차함수의 최적화" )
 plt.show()
 
 xx = np.linspace(0, 4, 800)
@@ -224,6 +235,7 @@ plt.xticks(np.linspace(0, 3, 4))
 plt.yticks(np.linspace(0, 2, 3))
 plt.xlabel("x")
 plt.ylabel("y")
-plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" , fontdict=font3)
+plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" )
 plt.show()
+
 
