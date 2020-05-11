@@ -1,6 +1,9 @@
-import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+#import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+# print(tf.__version__)
 
 X = np.array([1., 2., 3.])
 Y = np.array([1., 2., 3.])
@@ -39,4 +42,3 @@ plt.xlabel('W')
 plt.ylabel('cost')
 plt.grid()
 plt.show()
-
