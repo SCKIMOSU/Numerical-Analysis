@@ -9,23 +9,6 @@ plt.rc('axes', unicode_minus=False)
 # 눈으로 보기에는 비슷해보이지만 다른 글자입니다.
 # 따라서 유니코드 마이너스 기호를 쓰지 않도록 설정해줍니다.
 
-font1={'family':'NanumMyeongjo','color':'black','size':	24}
-font2={'family':'NanumBarunpen','color':'darkred','weight':'bold', 'size':18}
-font3={'family':'NanumBarunGothic','color':'blue','weight':'light','size':12}
-
-#x=np.linspace(0.0,5.0,100)
-#y=np.cos(2*np.pi*x)*np.exp(-x)
-#plt.plot(x,y,'k')
-#plt.title('한글 제목', fontdict=font1)
-#plt.xlabel('엑스 축', fontdict=font2)
-#plt.ylabel('와이 축', fontdict=font3)
-#plt.subplots_adjust()
-#plt.show()
-
-# 다음은 1차원 목적함수의 예이다.
-# 그래프에서 이 목적함수  f1(x) 의 최저점은  x∗=2 임을 알 수 있다.
-# https://datascienceschool.net/view-notebook/4642b9f187784444b8f3a8309c583007/
-
 def f1(x):
     return (x - 2) ** 2 + 2
 
@@ -36,7 +19,6 @@ plt.ylim(0, 10)
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
 plt.title("1차원 목적함수")
-#plt.title("cost function")
 plt.show()
 
 
@@ -174,6 +156,43 @@ plt.savefig('draw_contour.svg')
 plt.show()
 
 
+# https://problemsolvingwithpython.com/06-Plotting-with-Matplotlib/06.14-Contour-Plots/
+
+import numpy as np
+import matplotlib.pyplot as plt
+# if using a Jupyter notebook, include:
+#matplotlib inline
+
+x = np.arange(-3.0, 3.0, 0.1)
+y = np.arange(-3.0, 3.0, 0.1)
+X, Y = np.meshgrid(x, y)
+
+Z = np.sin(X)*np.cos(Y)
+fig, ax = plt.subplots(figsize=(6,6))
+
+ax.contour(X,Y,Z)
+plt.show()
+
+# Matplotlib's ax.contourf() method is similar to ax.contour()
+# except that ax.contourf() produces contour plots that are "filled".
+
+import numpy as np
+import matplotlib.pyplot as plt
+# if using a Jupyter notebook, include:
+# matplotlib inline
+
+x = np.arange(-3.0, 3.0, 0.1)
+y = np.arange(-3.0, 3.0, 0.1)
+
+X, Y = np.meshgrid(x, y)
+
+Z = np.sin(X)*np.cos(Y)
+
+fig, ax = plt.subplots(figsize=(6,6))
+ax.contourf(X,Y,Z)
+plt.show()
+
+##########
 def f2g(x, y):
     """f2(x, y)의 도함수"""
     # 2차원 로젠브록 함수의 도함수
@@ -244,4 +263,5 @@ plt.yticks(np.linspace(0, 2, 3))
 plt.xlabel("x")
 plt.ylabel("y")
 plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" )
+plt.show() 2차함수의 최적화 (진동 현상)" )
 plt.show()
