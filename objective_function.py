@@ -217,8 +217,19 @@ plt.plot(1, 1, 'ro', markersize=10)
 mu = 8e-4  # step size
 s = 0.95  # for arrowhead drawing
 
+'''''''''
+# https://matplotlib.org/gallery/text_labels_and_annotations/arrow_simple_demo.html
+
+import matplotlib.pyplot as plt
+
+plt.figure(10)
+ax = plt.axes()
+ax.arrow(0, 0, 0.5, 0.5, head_width=0.05, head_length=0.1, fc='k', ec='k')
+plt.show()
+'''
+
 x, y = -1, -1
-for i in range(5):
+for i in range(5): # 5000 
     g = f2g(x, y)
     plt.arrow(x, y, -s * mu * g[0], -s * mu * g[1],
               head_width=0.04, head_length=0.04, fc='k', ec='k', lw=2)
@@ -263,5 +274,4 @@ plt.yticks(np.linspace(0, 2, 3))
 plt.xlabel("x")
 plt.ylabel("y")
 plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" )
-plt.show() 2차함수의 최적화 (진동 현상)" )
 plt.show()
