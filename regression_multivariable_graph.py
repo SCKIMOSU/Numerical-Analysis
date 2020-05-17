@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 import sklearn.linear_model
 from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
+#import tensorflow.compat.v1 as tf
+#tf.disable_v2_behavior()
+# 텐서플로우 2.0 환경에서 1.x 코드 실행하기
+# print(tf.__version__)
 import keras
 from keras.models import Sequential
 from keras.layers.core import Dense
@@ -129,9 +133,3 @@ for step in range(2001):
     if step % 10 == 0:
         print(step, "Cost: ", cost_val)
         cost_history.append(sess.run(cost, feed_dict={X: x_data, Y: y_data}))
-
-
-
-
-###########
-
