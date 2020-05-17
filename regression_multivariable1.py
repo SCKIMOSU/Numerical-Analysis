@@ -1,4 +1,12 @@
+
 import tensorflow as tf
+#import tensorflow.compat.v1 as tf
+#tf.disable_v2_behavior()
+# 텐서플로우 2.0 환경에서 1.x 코드 실행하기
+# print(tf.__version__)
+
+
+
 #data
 x1_data = [1,0,3,0,5]
 x2_data = [0,2,0,4,0]
@@ -30,4 +38,3 @@ for step in range(2001):
     if step % 20 == 0:
         print (step, sess.run(cost), sess.run(W1),
                sess.run(W2), sess.run(b) )
-               
