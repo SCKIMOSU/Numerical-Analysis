@@ -7,6 +7,7 @@ import tensorflow as tf
 #tf.disable_v2_behavior()
 # 텐서플로우 2.0 환경에서 1.x 코드 실행하기
 # print(tf.__version__)
+
 import keras
 from keras.models import Sequential
 from keras.layers.core import Dense
@@ -133,3 +134,51 @@ for step in range(2001):
     if step % 10 == 0:
         print(step, "Cost: ", cost_val)
         cost_history.append(sess.run(cost, feed_dict={X: x_data, Y: y_data}))
+
+
+
+
+################################################
+# 다음은 scikit-learn의 LinearRegression 클래스를 이용하여
+# 보스턴 집값 데이터에 대해 회귀분석을 하는 예이다.
+
+from sklearn.datasets import load_boston
+
+boston = load_boston()
+model_boston = sklearn.linear_model.LinearRegression().fit(boston.data, boston.target)
+
+# 추정한 가중치 값은 다음과 같다. 특징 벡터의 이름과 비교하면
+# 각각의 가중치가 가지는 의미를 알 수 있다.
+# 예를 들어 방(RM) 하나가 증가하면 가격 예측치는
+# 약 3,810달러 정도 증가한다는 것을 알 수 있다
+
+model_boston.coef_
+# array([-1.08011358e-01,  4.64204584e-02,  2.05586264e-02,  2.68673382e+00,
+#        -1.77666112e+01,  3.80986521e+00,  6.92224640e-04, -1.47556685e+00,
+#         3.06049479e-01, -1.23345939e-02, -9.52747232e-01,  9.31168327e-03,
+#        -5.24758378e-01])
+
+
+
+boston.feature_names
+# array(['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD',
+#        'TAX', 'PTRATIO', 'B', 'LSTAT'], dtype='<U7')
+
+model_boston.intercept_
+# 36.459488385089855
+
+predictions = model_boston.predict(boston.data)
+
+plt.figure(10)
+plt.rc('font', family='Malgun Gothic')
+plt.rc('axes', unicode_minus=False)
+# 그런데 보통 한글 글꼴에는 유니코드 마이너스(−)가 없고
+# 일반 마이너스(-) 기호만 있습니다.
+# 눈으로 보기에는 비슷해보이지만 다른 글자입니다.
+# 따라서 유니코드 마이너스 기호를 쓰지 않도록 설정해줍니다.
+plt.scatter(boston.target, predictions)
+plt.xlabel(u"실제 집값")
+plt.ylabel(u"집값 예측치")
+plt.title("집값 예측치와 실제 집값의 관계")
+plt.show()
+
