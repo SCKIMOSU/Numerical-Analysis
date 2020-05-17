@@ -15,9 +15,9 @@ from keras.optimizers import RMSprop
 
 raw_data = np.genfromtxt('x09.txt', skip_header=36)
 
-xs = np.array(raw_data[:,2], dtype=np.float32)
-ys = np.array(raw_data[:,3], dtype=np.float32)
-zs = np.array(raw_data[:,4], dtype=np.float32)
+xs = np.array(raw_data[:,2], dtype=np.float32) # weight
+ys = np.array(raw_data[:,3], dtype=np.float32) # age
+zs = np.array(raw_data[:,4], dtype=np.float32) # blood fat
 
 fig = plt.figure(figsize=(12,12))
 ax = fig.add_subplot(111, projection='3d')
