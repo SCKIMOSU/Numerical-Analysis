@@ -40,16 +40,16 @@ model = sklearn.linear_model.LinearRegression()
 model.fit(X, y)
 
 print(model)
-print('Est [100,40] : ', model.predict([[100,40]]))
-print('Est [60,25] : ', model.predict([[60,25]]))
+print('Est [100,40] : ', model.predict([[100,40]])) # (Weight:100, Age: 40) -> blood fat: 328.38
+print('Est [60,25] : ', model.predict([[60,25]])) # (Weight:60, Age: 25) -> blood fat: 233.43
 
 
 knn = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
 knn.fit(X, y)
 
 print(knn)
-print('Est [100,40] : ', knn.predict([[100,40]]))
-print('Est [60,25] : ', knn.predict([[60,25]]))
+print('Est [100,40] : ', knn.predict([[100,40]])) # (Weight:100, Age: 40) -> blood fat: 306
+print('Est [60,25] : ', knn.predict([[60,25]])) # (Weight:60, Age: 25) -> blood fat: 262
 
 
 ###
@@ -136,8 +136,6 @@ for step in range(2001):
         cost_history.append(sess.run(cost, feed_dict={X: x_data, Y: y_data}))
 
 
-
-
 ################################################
 # 다음은 scikit-learn의 LinearRegression 클래스를 이용하여
 # 보스턴 집값 데이터에 대해 회귀분석을 하는 예이다.
@@ -157,7 +155,6 @@ model_boston.coef_
 #        -1.77666112e+01,  3.80986521e+00,  6.92224640e-04, -1.47556685e+00,
 #         3.06049479e-01, -1.23345939e-02, -9.52747232e-01,  9.31168327e-03,
 #        -5.24758378e-01])
-
 
 
 boston.feature_names
@@ -181,4 +178,5 @@ plt.xlabel(u"실제 집값")
 plt.ylabel(u"집값 예측치")
 plt.title("집값 예측치와 실제 집값의 관계")
 plt.show()
+
 
