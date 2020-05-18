@@ -3,11 +3,6 @@ import matplotlib.pyplot as plt
 import sklearn.linear_model
 from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
-#import tensorflow.compat.v1 as tf
-#tf.disable_v2_behavior()
-# 텐서플로우 2.0 환경에서 1.x 코드 실행하기
-# print(tf.__version__)
-
 import keras
 from keras.models import Sequential
 from keras.layers.core import Dense
@@ -20,6 +15,8 @@ xs = np.array(raw_data[:,2], dtype=np.float32) # weight
 ys = np.array(raw_data[:,3], dtype=np.float32) # age
 zs = np.array(raw_data[:,4], dtype=np.float32) # blood fat
 
+
+plt.figure(1)
 fig = plt.figure(figsize=(12,12))
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(xs, ys, zs)
@@ -40,17 +37,24 @@ model = sklearn.linear_model.LinearRegression()
 model.fit(X, y)
 
 print(model)
-print('Est [100,40] : ', model.predict([[100,40]])) # (Weight:100, Age: 40) -> blood fat: 328.38
-print('Est [60,25] : ', model.predict([[60,25]])) # (Weight:60, Age: 25) -> blood fat: 233.43
+print('Est [100,40] : ', model.predict([[100,40]]))
+# (Weight:100, Age: 40) -> blood fat: 328.38
+# [328.38238085] -> sklearn LinearRegression 예측값
+print('Est [60,25] : ', model.predict([[60,25]]))
+#  (Weight:60, Age: 25) -> blood fat: 233.43
+#   [233.43903476] -> sklearn LinearRegression 예측값
 
 
 knn = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
 knn.fit(X, y)
 
 print(knn)
-print('Est [100,40] : ', knn.predict([[100,40]])) # (Weight:100, Age: 40) -> blood fat: 306
-print('Est [60,25] : ', knn.predict([[60,25]])) # (Weight:60, Age: 25) -> blood fat: 262
-
+print('Est [100,40] : ', knn.predict([[100,40]]))
+# (Weight:100, Age: 40) -> blood fat: 306
+# [306.]  ->  sklearn KNeighborsRegressor 예측값
+print('Est [60,25] : ', knn.predict([[60,25]]))
+# (Weight:60, Age: 25) -> blood fat: 262
+#  [262.] -> sklearn KNeighborsRegressor 예측값
 
 ###
 
@@ -59,31 +63,59 @@ y_data = np.array(raw_data[:,4], dtype=np.float32)
 
 y_data = y_data.reshape((25,1))
 
+#from keras.models import Sequential
+#from keras.layers.core import Dense
+#from keras.optimizers import RMSprop
+
 rmsprop=RMSprop(lr=0.01)
 
+# https://keras.io/ko/getting-started/sequential-model-guide/
+# Sequential 모델은 레이어를 선형으로 연결하여 구성합니다.
+# 레이어 인스턴스를 생성자에게 넘겨줌으로써 Sequential 모델을 구성할 수 있습니다.
+
 model=Sequential()
+
+# 또한, .add() 메소드를 통해서 쉽게 레이어를 추가할 수 있습니다.
 model.add(Dense(1, input_shape=(2,)))
+# 모델을 학습시키기 이전에, compile 메소드를 통해서 학습 방식에 대한 환경설정을 해야 합니다.
+# 다음의 세 개의 인자를 입력으로 받습니다.
 model.compile(loss='mse', optimizer=rmsprop)
 model.summary()
+
+# 학습
+# 케라스 모델들은 입력 데이터와 라벨로 구성된 Numpy 배열 위에서 이루어집니다. \
+# 모델을 학습기키기 위해서는 일반적으로 fit함수를 사용합니다.
+# 여기서 자세한 정보를 알 수 있습니다.
 
 hist=model.fit(x_data, y_data, epochs=2000)
 
 print(hist.history.keys())
 # dict_keys(['loss'])
-
+plt.figure(3)
 plt.plot(hist.history['loss'])
 plt.title('model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
+plt.grid()
 plt.show()
 
 model.predict(np.array([100, 40]).reshape(1,2))
-model.predict(np.array([60, 25]).reshape(1,2))
+# array([[348.74396]], dtype=float32) -> 케라스 예측값
 
+# [328.38238085] -> sklearn LinearRegression 예측값
+#  [306.]  ->  sklearn KNeighborsRegressor 예측값
+
+model.predict(np.array([60, 25]).reshape(1,2))
+# array([[222.32545]], dtype=float32) -> 케라스 예측값
+
+# [233.43903476] -> sklearn LinearRegression 예측값
+# [262.] -> sklearn KNeighborsRegressor 예측값
 
 W_, b_=model.get_weights()
 W_, b_
+# (array([[1.0955558], : 가중치
+#         [5.507313 ]], : 절편 dtype=float32), array([18.904305], dtype=float32))
 
 x=np.linspace(20, 100, 50).reshape(50,1)
 y=np.linspace(10, 70, 50).reshape(50,1)
@@ -91,6 +123,7 @@ y=np.linspace(10, 70, 50).reshape(50,1)
 X=np.concatenate((x,y), axis=1)
 Z=np.matmul(X, W_)+b_
 
+plt.figure(4)
 fig = plt.figure(figsize=(12,12))
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x, y, Z)
@@ -134,6 +167,11 @@ for step in range(2001):
     if step % 10 == 0:
         print(step, "Cost: ", cost_val)
         cost_history.append(sess.run(cost, feed_dict={X: x_data, Y: y_data}))
+
+
+
+
+###########
 
 
 ################################################
