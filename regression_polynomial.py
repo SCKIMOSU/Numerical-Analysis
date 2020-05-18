@@ -11,6 +11,7 @@ plt.figure(1)
 plt.plot(x, y, 'ro', np.polyval(p2, x), 'b*-' )  # x, p2[0]*x**2+p2[1]*x+p2[2]
 plt.legend(['Real Data', 'Polynomial Regression by np.polyfit(x,y,2)'])
 plt.grid()
+plt.show()
 
 
 # 편미분을 이용한 다항 회귀
@@ -30,3 +31,4 @@ plt.figure(2)
 plt.plot(x,y,'ro', x1, y1, 'b*:')
 plt.legend(['Real Data','Polynomial Regression by Partial Derivative'])
 plt.grid()
+plt.show() 
