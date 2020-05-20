@@ -21,24 +21,14 @@ Random values in a given shape.
 Create an array of the given shape and populate it with
 random samples from a uniform distribution
 over ``[0, 1)``.
-
 np.random.randn?
 Docstring:
 randn(d0, d1, ..., dn)
 Return a sample (or samples) from the "standard normal" distribution.
-
 '''
 np.savez('ch5_data.npz', X=X, X_min=X_min, X_max=X_max, X_n=X_n, T=T) # (B)
 
-# 리스트 5-1-(12)
-# 2차원 데이터 생성 --------------------------
-X0 = X
-X0_min = 5
-X0_max = 30
-np.random.seed(seed=1) # 난수를 고정
-X1 = 23 * (T / 100)**2 + 2 * np.random.randn(X_n)
-X1_min = 40
-X1_max = 75
+
 
 # 리스트 5-1-(5)
 # 데이터 그래프 ------------------------------
