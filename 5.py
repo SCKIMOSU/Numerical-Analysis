@@ -101,7 +101,7 @@ def dmse_line(x, t, w):
 
 
 # 리스트 5-1-(9)
-# 구배법 ------------------------------------
+# 경사하강법 ------------------------------------
 def fit_line_num(x, t):
     w_init = [10.0, 165.0] # 초기 매개 변수
     alpha = 0.001 # 학습률
@@ -137,7 +137,7 @@ cont = plt.contour(xx0, xx1, J, 30, colors='black',
                    levels=(100, 1000, 10000, 100000))
 cont.clabel(fmt='%1.0f', fontsize=8)
 plt.grid(True)
-# 구배법 호출
+# 경사하강법 호출
 W0, W1, dMSE, W_history = fit_line_num(X, T)
 # 결과보기
 print('반복 횟수 {0}'.format(W_history.shape[0]))
@@ -203,18 +203,36 @@ if  __name__ == '__main__':  # 리스트 5-1-(8)
     plt.show()
 
 
+# 리스트 5-1-(12)
+# 2차원 데이터 생성 --------------------------
+X0 = X
+X0_min = 5
+X0_max = 30
+np.random.seed(seed=1) # 난수를 고정
+X1 = 23 * (T / 100)**2 + 2 * np.random.randn(X_n)
+X1_min = 40
+X1_max = 75
 
+# 리스트 5-1-(13)
 print('X0[나이]= ', np.round(X0, 2))
 print('X1[몸무게]= ', np.round(X1, 2))
 print('T[키]= ', np.round(T, 2))
 
 
+
 # 리스트 5-1-(14)
 # 2차원 데이터의 표시 ------------------------
 def show_data2(ax, x0, x1, t):
+    # x0=X0; x1=X1; t=T
     for i in range(len(x0)):
         ax.plot([x0[i], x0[i]], [x1[i], x1[i]],
                 [120, t[i]], color='gray')
+        # x0[i], x0[i]
+        # (15.42555011756435, 15.42555011756435)
+        # x1[i], x1[i]
+        # (70.43231869836629, 70.43231869836629)
+        # 120, t[i]
+        # (120, 170.91013144599378)
         ax.plot(x0, x1, t, 'o',
                 color='cornflowerblue', markeredgecolor='black',
                 markersize=6, markeredgewidth=0.5)
