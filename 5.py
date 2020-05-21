@@ -42,8 +42,8 @@ plt.show()
 
 from mpl_toolkits.mplot3d import Axes3D
 # 평균 오차 함수 ------------------------------
-def mse_line(x, t, w):
-    y = w[0] * x + w[1]
+def mse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1])
+    y = w[0] * x + w[1] # (나이 , w[0]), (키 , w[1])
     mse = np.mean((y - t)**2)
     return mse
 
@@ -52,10 +52,10 @@ def mse_line(x, t, w):
 
 # 계산 --------------------------------------
 xn = 100 # 등고선 표시 해상도
-w0_range = [-25, 25]
-w1_range = [120, 170]
-x0 = np.linspace(w0_range[0], w0_range[1], xn)
-x1 = np.linspace(w1_range[0], w1_range[1], xn)
+w0_range = [-25, 25] #나이
+w1_range = [120, 170] # 키
+x0 = np.linspace(w0_range[0], w0_range[1], xn) #나이
+x1 = np.linspace(w1_range[0], w1_range[1], xn) # 키
 xx0, xx1 = np.meshgrid(x0, x1)
 J = np.zeros((len(x0), len(x1)))
 for i0 in range(xn):
@@ -83,7 +83,7 @@ plt.show()
 
 # 리스트 5-1-(7)
 # 평균 제곱 오차의 기울기 ------------------------
-def dmse_line(x, t, w):
+def dmse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1])
     y = w[0] * x + w[1]
     d_w0 = 2 * np.mean((y - t) * x)
     d_w1 = 2 * np.mean(y - t)
