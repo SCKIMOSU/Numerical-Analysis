@@ -92,7 +92,7 @@ def dmse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1])
 
 # 리스트 5-1-(9)
 # 경사하강법 ------------------------------------
-def fit_line_num(x, t):
+def fit_line_num(x, t): # x=X; t=T
     w_init = [10.0, 165.0] # 초기 매개 변수
     alpha = 0.001 # 학습률
     i_max = 100000 # 반복의 최대 수
@@ -109,6 +109,14 @@ def fit_line_num(x, t):
     w1 = w_i[i, 1]
     w_i = w_i[:i, :]
     return w0, w1, dmse, w_i
+
+#  w0, w1, dmse, w_i 확인
+# (1.5399473562672923,
+# 136.1761603274906,
+#(-0.005793591015883948, 0.09999091251416559),
+# array([[ 10.        , 165.        ],
+#        [  4.95371356, 164.69820279],
+#        [  2.4301957 , 164.54258086],
 
 
 # 메인 ------------------------------------
@@ -127,15 +135,27 @@ cont = plt.contour(xx0, xx1, J, 30, colors='black',
                    levels=(100, 1000, 10000, 100000))
 cont.clabel(fmt='%1.0f', fontsize=8)
 plt.grid(True)
+
 # 경사하강법 호출
+# 디버깅 포인트
 W0, W1, dMSE, W_history = fit_line_num(X, T)
 # 결과보기
 print('반복 횟수 {0}'.format(W_history.shape[0]))
 print('W=[{0:.6f}, {1:.6f}]'.format(W0, W1))
 print('dMSE=[{0:.6f}, {1:.6f}]'.format(dMSE[0], dMSE[1]))
 print('MSE={0:.6f}'.format(mse_line(X, T, [W0, W1])))
+
+# 디버깅 포인트
 plt.plot(W_history[:, 0], W_history[:, 1], '.-',
          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+
+# W_history[0, 0], W_history[0, 1] 부터 먼저 시작
+# plt.plot(W_history[0, 0], W_history[0, 1], '.-',
+#     ...:          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+
+# np.round([W_history[1, 0], W_history[1, 1]], 2)
+# array([  4.95, 164.7 ])
+
 plt.show()
 
 
