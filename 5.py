@@ -189,9 +189,9 @@ if  __name__ == '__main__':  # 리스트 5-1-(8)
     plt.figure(figsize=(4, 4))
     W=np.array([W0, W1])
     mse = mse_line(X, T, W)
-    print("w0={0:.3f}, w1={1:.3f}".format(W0, W1))
+    print("수치해: w0={0:.3f}, w1={1:.3f}".format(W0, W1))
     # mse = mse_line(X, T, W)
-    print("SD={0:.3f} cm".format(np.sqrt(mse)))
+    print("수치해: SD={0:.3f} cm".format(np.sqrt(mse)))
     show_line(W)
     plt.plot(X, T, marker='o', linestyle='None',
              color='cornflowerblue', markeredgecolor='black')
@@ -201,9 +201,9 @@ if  __name__ == '__main__':  # 리스트 5-1-(8)
 
     # 메인 ------------------------------------
     W = fit_line(X, T)
-    print("w0={0:.3f}, w1={1:.3f}".format(W[0], W[1]))
+    print("해석해: w0={0:.3f}, w1={1:.3f}".format(W[0], W[1]))
     mse = mse_line(X, T, W)
-    print("SD={0:.3f} cm".format(np.sqrt(mse)))
+    print("해석해: SD={0:.3f} cm".format(np.sqrt(mse)))
     plt.figure(figsize=(4, 4))
     show_line(W)
     plt.plot(X, T, marker='o', linestyle='None',
