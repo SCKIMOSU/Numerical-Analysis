@@ -259,7 +259,7 @@ plt.show()
 
 # 리스트 5-1-(15)
 #면의 표시 ----------------------------------
-def show_plane(ax, w):
+def show_plane(ax, w):  # w=W
     px0 = np.linspace(X0_min, X0_max, 5)
     px1 = np.linspace(X1_min, X1_max, 5)
     px0, px1 = np.meshgrid(px0, px1)
@@ -475,4 +475,142 @@ plt.plot(M, mse_test, marker='o', linestyle='-',
 plt.legend(loc='upper left', fontsize=10)
 plt.ylim(0, 12)
 plt.grid(True)
+plt.show()
+
+# 리스트 5-2-(12)
+# K 분할 교차 검증 -----------------------------
+def kfold_gauss_func(x, t, m, k):
+    n = x.shape[0]
+    mse_train = np.zeros(k)
+    mse_test = np.zeros(k)
+    for i in range(0, k):
+        x_train = x[np.fmod(range(n), k) != i] # (A)
+        t_train = t[np.fmod(range(n), k) != i] # (A)
+        x_test = x[np.fmod(range(n), k) == i] # (A)
+        t_test = t[np.fmod(range(n), k) == i] # (A)
+        wm = fit_gauss_func(x_train, t_train, m)
+        mse_train[i] = mse_gauss_func(x_train, t_train, wm)
+        mse_test[i] = mse_gauss_func(x_test, t_test, wm)
+    return mse_train, mse_test
+
+# 리스트 5-2-(13)
+np.fmod(range(10),5)
+# array([0, 1, 2, 3, 4, 0, 1, 2, 3, 4], dtype=int32)
+
+# 리스트 5-2-(14)
+M = 4
+K = 4
+kfold_gauss_func(X, T, M, K)
+
+# 리스트 5-2-(15)
+M = range(2, 8)
+K = 16
+Cv_Gauss_train = np.zeros((K, len(M)))
+Cv_Gauss_test = np.zeros((K, len(M)))
+for i in range(0, len(M)):
+    Cv_Gauss_train[:, i], Cv_Gauss_test[:, i] =\
+                    kfold_gauss_func(X, T, M[i], K)
+mean_Gauss_train = np.sqrt(np.mean(Cv_Gauss_train, axis=0))
+mean_Gauss_test = np.sqrt(np.mean(Cv_Gauss_test, axis=0))
+
+
+plt.figure(figsize=(4, 3))
+plt.plot(M, mean_Gauss_train, marker='o', linestyle='-',
+         color='k', markerfacecolor='w', label='training')
+plt.plot(M, mean_Gauss_test, marker='o', linestyle='-',
+         color='cornflowerblue', markeredgecolor='black', label='test')
+plt.legend(loc='upper left', fontsize=10)
+plt.ylim(0, 20)
+plt.grid(True)
+plt.show()
+
+# 리스트 5-2-(16)
+M = 3
+plt.figure(figsize=(4, 4))
+W = fit_gauss_func(X, T, M)
+show_gauss_func(W)
+plt.plot(X, T, marker='o', linestyle='None',
+         color='cornflowerblue', markeredgecolor='black')
+plt.xlim([X_min, X_max])
+plt.grid(True)
+mse = mse_gauss_func(X, T, W)
+print("SD={0:.2f} cm".format(np.sqrt(mse)))
+plt.show()
+
+
+# 리스트 5-2-(17)
+# 모델 A -----------------------------------
+def model_A(x, w):
+    y = w[0] - w[1] * np.exp(-w[2] * x)
+    return y
+
+
+# 모델 A 표시 -------------------------------
+def show_model_A(w):
+    xb = np.linspace(X_min, X_max, 100)
+    y = model_A(xb, w)
+    plt.plot(xb, y, c=[.5, .5, .5], lw=4)
+
+
+# 모델 A의 MSE ------------------------------
+def mse_model_A(w, x, t):
+    y = model_A(x, w)
+    mse = np.mean((y - t)**2)
+    return mse
+
+# 리스트 5-2-(18)
+from scipy.optimize import minimize
+
+
+# 모델 A의 매개 변수 최적화 -----------------
+def fit_model_A(w_init, x, t):
+    res1 = minimize(mse_model_A, w_init, args=(x, t), method="powell")
+    return res1.x
+
+# 리스트 5-2-(19)
+# 메인 ------------------------------------
+plt.figure(figsize=(4, 4))
+W_init=[100, 0, 0]
+W = fit_model_A(W_init, X, T)
+print("w0={0:.1f}, w1={1:.1f}, w2={2:.1f}".format(W[0], W[1], W[2]))
+show_model_A(W)
+plt.plot(X, T, marker='o', linestyle='None',
+         color='cornflowerblue',markeredgecolor='black')
+plt.xlim(X_min, X_max)
+plt.grid(True)
+mse = mse_model_A(W, X, T)
+print("SD={0:.2f} cm".format(np.sqrt(mse)))
+plt.show()
+
+
+
+# 리스트 5-2-(20)
+# 교차 검증 model_A ---------------------------
+def kfold_model_A(x, t, k):
+    n = len(x)
+    mse_train = np.zeros(k)
+    mse_test = np.zeros(k)
+    for i in range(0, k):
+        x_train = x[np.fmod(range(n), k) != i]
+        t_train = t[np.fmod(range(n), k) != i]
+        x_test = x[np.fmod(range(n), k) == i]
+        t_test = t[np.fmod(range(n), k) == i]
+        wm = fit_model_A(np.array([169, 113, 0.2]), x_train, t_train)
+        mse_train[i] = mse_model_A(wm, x_train, t_train)
+        mse_test[i] = mse_model_A(wm, x_test, t_test)
+    return mse_train, mse_test
+
+
+# 메인 ------------------------------------
+K = 16
+Cv_A_train, Cv_A_test = kfold_model_A(X, T, K)
+mean_A_test = np.sqrt(np.mean(Cv_A_test))
+print("Gauss(M=3) SD={0:.2f} cm".format(mean_Gauss_test[1]))
+print("Model A SD={0:.2f} cm".format(mean_A_test))
+SD = np.append(mean_Gauss_test[0:5], mean_A_test)
+M = range(6)
+label = ["M=2", "M=3", "M=4", "M=5", "M=6", "Model A"]
+plt.figure(figsize=(5, 3))
+plt.bar(M, SD, tick_label=label, align="center",
+facecolor="cornflowerblue")
 plt.show()
