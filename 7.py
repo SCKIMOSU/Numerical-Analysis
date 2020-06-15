@@ -210,7 +210,7 @@ print(CE_FNN(WV, M, K, X_train[:2, :], T_train[:2, :]))
 
 # 리스트 7-1-(6)
 # - 수치 미분 ------------------
-def dCE_FNN_num(wv, M, K, x, t):
+def dCE_FNN_num(wv, M, K, x, t): # wv=WV; M; K; x=X_train[:2, :]; t=T_train[:2, :]
     epsilon = 0.001
     dwv = np.zeros_like(wv)
     for iwv in range(len(wv)):
@@ -251,6 +251,8 @@ import time
 
 # 수치 미분을 사용한 경사법 -------
 def Fit_FNN_num(wv_init, M, K, x_train, t_train, x_test, t_test, n, alpha):
+    # wv_init=WV_init; M; K; x_train=X_train; t_train=T_train
+    # x_test=X_test; t_test=T_test; n=N_step; alpha
     wvt = wv_init
     err_train = np.zeros(n)
     err_test = np.zeros(n)
