@@ -1,4 +1,14 @@
 #-- 리스트 7-1-(1)
+# Non-string object detected for the array ordering
+# Your code is assuming an older version of numpy.
+#
+# Newer versions of numpy (mine is 1.14.0) you can check the docstring in IPython by typing
+# This problem is caused because you have a newer version of numpy than FiPy is tested with. (see issue #703).
+# Thank you! Downgrading numpy to version 1.17 solved the issue for now. Looking forward to the new Version. – Julian Feb 13 at 7:08
+# >>> import numpy
+# >>> numpy.__version__
+# >>> pip install --upgrade numpy==1.16.2
+
 import numpy as np
 # 데이터 생성 --------------------------------
 np.random.seed(seed=1) # 난수를 고정
@@ -698,4 +708,3 @@ for ic in range(K):
     plt.xlim(X_range0)
     plt.ylim(X_range1)
 plt.show()
-
