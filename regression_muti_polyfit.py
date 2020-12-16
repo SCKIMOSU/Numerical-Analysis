@@ -8,7 +8,8 @@ y=np.sin(x)
 # 구간 [0,4*pi]에 따라 사인 곡선을 시각화한다
 plt.figure(1)
 plt.plot(x, y)
-
+plt.grid()
+plt.show()
 # np.polyfit을 사용하여 이들 점에 7차 다항식을 피팅합니다.
 
 p = np.polyfit(x,y,7)
@@ -18,4 +19,5 @@ x1 = np.linspace(0, 4*np.pi)
 y1 = np.polyval(p,x1)
 plt.figure(2)
 plt.plot(x, y, x1, y1, 'r*')
-plt.grid() 
+plt.grid()
+plt.show()
