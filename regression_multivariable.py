@@ -1,6 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn.linear_model
+#import sklearn.model_selection
+# from sklearn.model_selection import train_test_split
+from sklearn import datasets, linear_model
+from sklearn.neighbors import KNeighborsRegressor
+
 from mpl_toolkits.mplot3d import Axes3D
 
 raw_data = np.genfromtxt('x09.txt', skip_header=36)
@@ -31,6 +36,7 @@ model.fit(X, y)
 print(model)
 print('Est [100,40] : ', model.predict([[100,40]]))
 print('Est [60,25] : ', model.predict([[60,25]]))
+
 
 
 knn = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
