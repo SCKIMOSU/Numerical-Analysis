@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn.linear_model
+from sklearn.neighbors import KNeighborsRegressor
+
 from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
 #import tensorflow.compat.v1 as tf
@@ -220,5 +222,6 @@ plt.xlabel(u"실제 집값")
 plt.ylabel(u"집값 예측치")
 plt.title("집값 예측치와 실제 집값의 관계")
 plt.show()
+
 
 
