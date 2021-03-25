@@ -15,7 +15,7 @@ def bisect(func, xl, xu):
         xr=np.float((xl+xu)/2)
         iter=iter+1
 
-        if xr != 0:
+        if xr != 0:  # 나누기에서 분모가 0이면 안 되죠. 0으로 나누는 것은 ZeroDivisionError: division by zero 가 발생하죠 
             ea=np.float(np.abs(np.float(xr)-np.float(xrold))/np.float(xr))*100
 
         test=func(xl)*func(xr)
