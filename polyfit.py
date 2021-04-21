@@ -1,4 +1,4 @@
-# in order to how to use polyfit mothod in numpy 
+# in order to how to use polyfit mothod in numpy
 import numpy as np
 import matplotlib.pyplot as plt
 x=np.array([0,1,2,3,4,5])
@@ -14,8 +14,10 @@ plt.figure(1)
 plt.plot(x, y, 'o')
 plt.grid()
 plt.plot(x, np.polyval(p1,x), 'r-')  # p1 from np.polyfit, plot(x, p1 with polyval
+plt.show()
 
 plt.figure(2)
 plt.plot(x, y, 'o')
 plt.grid()
 plt.plot(x, p1[0]*x+p1[1], 'r-')
+plt.show()
