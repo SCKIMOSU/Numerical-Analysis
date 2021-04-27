@@ -1,6 +1,3 @@
-
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 #import tensorflow as tf
@@ -16,7 +13,10 @@ def Data_Genearion(num_points):
     vectors_set = []
     for i in np.arange(num_points):
         x = np.random.normal(2, 2) + 10
+        # [0,4] @ 68% + 10 =  [10,14] @ 68%
         y = x * 5 + (np.random.normal(0, 3)) * 2
+        # [10,14] @ 68%  *5 = [50, 70] @ 68%
+        # [50, 70] @ 68% + [-3, 3] @ 68% *2  = [44, 76] @ 68%
         vectors_set.append([x, y])
 
         # print(np.round(vectors_set, 1))
