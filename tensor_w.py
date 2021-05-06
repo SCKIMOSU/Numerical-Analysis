@@ -64,8 +64,14 @@ def Data_Learning(x_data, y_data):
     loss = tf.reduce_mean(tf.square(y - y_data))
     # print(np.round(sess.run(loss),1))
     # optimizer = tf.train.GradientDescentOptimizer(0.0015)
-    # 
-    optimizer = tf.train.GradientDescentOptimizer(0.01)
+    #
+    #optimizer = tf.train.GradientDescentOptimizer(0.0001)
+    # 느린 수렴 : (0.0001) --> for step in np.arange(1000):
+    #
+
+    optimizer = tf.train.GradientDescentOptimizer(0.0015)
+    # 적절한 수렴 : (0.0015) --> for step in np.arange(10):
+    # 반복 연산복잡도를 줄이는 중요한 역할을 하는 학습률
 
     train = optimizer.minimize(loss)
 
