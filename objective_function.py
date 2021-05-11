@@ -245,6 +245,11 @@ plt.ylabel("y")
 plt.title("최대경사법을 사용한 2차함수의 최적화" )
 plt.show()
 
+
+
+plt.figure(100)
+# 로젠브룩함수를 x범위 0, 4까지, y 범위 0,3까지 확대해서 다시 그린다
+
 xx = np.linspace(0, 4, 800)
 yy = np.linspace(0, 3, 600)
 X, Y = np.meshgrid(xx, yy)
