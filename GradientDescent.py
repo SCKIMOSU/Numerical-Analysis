@@ -4,6 +4,9 @@
 
 # # From calculation, we expect that the local minimum occurs at x=9/4
 #
+import numpy as np
+import matplotlib.pyplot as plt
+
 x_old = 0
 x_new = 6 # The algorithm starts at x=6
 eps = 0.01 # step size
@@ -11,6 +14,11 @@ precision = 0.00001
 
 def f_prime(x):
     return 4 * x**3 - 9 * x**2
+
+plt.figure(1)
+xx = np.linspace(-1, 4, 100)
+plt.plot(xx, f_prime(xx))
+plt.show()
 
 while abs(x_new - x_old) > precision:
     x_old = x_new
