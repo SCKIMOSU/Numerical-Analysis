@@ -26,7 +26,7 @@ plt.colorbar()
 plt.figure(4)
 plt.imshow(Z, extent=[0, 5, 0, 5], origin='lower',cmap='RdGy')
 plt.colorbar()
-plt.axis(aspect='image')
+#plt.axis(aspect='image')
 
 plt.figure(5)
 contours = plt.contour(X, Y, Z, 3, colors='black')
