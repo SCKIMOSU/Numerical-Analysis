@@ -5,8 +5,8 @@ from sklearn.neighbors import KNeighborsRegressor
 
 from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
-#import tensorflow.compat.v1 as tf
-#tf.disable_v2_behavior()
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 # 텐서플로우 2.0 환경에서 1.x 코드 실행하기
 # print(tf.__version__)
 import keras
@@ -41,9 +41,26 @@ y = np.array(raw_data[:,4], dtype=np.float64)
 
 model = sklearn.linear_model.LinearRegression()
 model.fit(X, y)
+# 아래의 텐서플로우 코드를 두 개의 라인으로 추상화했음
+# 추상화가 잘 된 케이스
 
+# hypothesis = W1 * x1_data + W2 * x2_data + b
+# cost = tf.reduce_mean(tf.square(hypothesis - y_data))
+# a = tf.Variable(0.1) #alpha, learning rate
+# optimizer = tf.train.GradientDescentOptimizer(a)
+# train = optimizer.minimize(cost)
+# init = tf.initialize_all_variables()
+# sess = tf.Session()
+# sess.run(init)
+# for step in range(2001):
+#     sess.run(train)
+#     if step % 20 == 0:
+#         print (step, sess.run(cost), sess.run(W1),
+#                sess.run(W2), sess.run(b) )
 print(model)
 print('Est [100,40] : ', model.predict([[100,40]]))
+# 예측가능
+
 # (Weight:100, Age: 40) -> blood fat: 328.38
 # [328.38238085] -> sklearn LinearRegression 예측값
 print('Est [60,25] : ', model.predict([[60,25]]))
@@ -52,6 +69,8 @@ print('Est [60,25] : ', model.predict([[60,25]]))
 
 
 knn = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
+# model = sklearn.linear_model.LinearRegression() 모델링과 다른
+# KNeighborsRegressor(n_neighbors=3) KNeighborsRegressor 사용
 knn.fit(X, y)
 
 print(knn)
@@ -74,7 +93,7 @@ y_data = y_data.reshape((25,1))
 #from keras.optimizers import RMSprop
 
 rmsprop=RMSprop(lr=0.01)
-
+#
 # https://keras.io/ko/getting-started/sequential-model-guide/
 # Sequential 모델은 레이어를 선형으로 연결하여 구성합니다.
 # 레이어 인스턴스를 생성자에게 넘겨줌으로써 Sequential 모델을 구성할 수 있습니다.
@@ -120,20 +139,33 @@ model.predict(np.array([60, 25]).reshape(1,2))
 
 W_, b_=model.get_weights()
 W_, b_
+# 모델링된 가중치(기울기)와 절편을 출력해보자
 # (array([[1.0955558], : 가중치
 #         [5.507313 ]], : 절편 dtype=float32), array([18.904305], dtype=float32))
 
+# 실제 데이터셋에 모델링된 직선을 그려보자
+# 실제 데이터셋
 x=np.linspace(20, 100, 50).reshape(50,1)
 y=np.linspace(10, 70, 50).reshape(50,1)
 
 X=np.concatenate((x,y), axis=1)
+
+# 모델링된 모델값
 Z=np.matmul(X, W_)+b_
 
 plt.figure(4)
+
 fig = plt.figure(figsize=(12,12))
+# 3차원 구조를 만들어 보자
 ax = fig.add_subplot(111, projection='3d')
+
+# 모델링직선을 출력해보자
 ax.scatter(x, y, Z)
+
+# 실제 데이터셋을 출력해보자
 ax.scatter(xs, ys, zs)
+
+
 ax.set_xlabel('Weight')
 ax.set_ylabel('Age')
 ax.set_zlabel('Blood fat')
@@ -210,7 +242,7 @@ model_boston.intercept_
 
 predictions = model_boston.predict(boston.data)
 
-plt.figure(10)
+plt.figure(20)
 plt.rc('font', family='Malgun Gothic')
 plt.rc('axes', unicode_minus=False)
 # 그런데 보통 한글 글꼴에는 유니코드 마이너스(−)가 없고
@@ -222,6 +254,9 @@ plt.xlabel(u"실제 집값")
 plt.ylabel(u"집값 예측치")
 plt.title("집값 예측치와 실제 집값의 관계")
 plt.show()
+
+
+
 
 
 
