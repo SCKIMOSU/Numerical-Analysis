@@ -67,7 +67,7 @@ T = Prm_c[0] - Prm_c[1] * np.exp(-Prm_c[2] * X) \
 # [-4, 4]@68%
 
 # [130, 169]@100% + [-4, 4]@68%
-# [126, 173]@100% 
+# [126, 173]@100%
 np.savez('ch5_data.npz', X=X, X_min=X_min, X_max=X_max, X_n=X_n, T=T) # (B)
 
 # 리스트 5-1-(2)
@@ -91,23 +91,23 @@ plt.show()
 # 리스트 5-1-(6)
 from mpl_toolkits.mplot3d import Axes3D
 # 평균 오차 함수 ------------------------------
-def mse_line(x, t, w):
-    y = w[0] * x + w[1]
+def mse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1])
+    y = w[0] * x + w[1] # (나이 , w[0]), (키 , w[1])
     mse = np.mean((y - t)**2)
     return mse
 
 # 계산 --------------------------------------
 xn = 100 # 등고선 표시 해상도
-w0_range = [-25, 25]
-w1_range = [120, 170]
-x0 = np.linspace(w0_range[0], w0_range[1], xn)
-x1 = np.linspace(w1_range[0], w1_range[1], xn)
+w0_range = [-25, 25] #나이
+w1_range = [120, 170] # 키
+x0 = np.linspace(w0_range[0], w0_range[1], xn) #나이
+x1 = np.linspace(w1_range[0], w1_range[1], xn) # 키
 xx0, xx1 = np.meshgrid(x0, x1)
 J = np.zeros((len(x0), len(x1)))
 for i0 in range(xn):
     for i1 in range(xn):
         J[i1, i0] = mse_line(X, T, (x0[i0], x1[i1]))
-
+        #  나이, 키, (나이 , w[0]), (키 , w[1])
 # 표시 --------------------------------------
 plt.figure(figsize=(9.5, 4))
 plt.subplots_adjust(wspace=0.5)
@@ -128,7 +128,7 @@ plt.show()
 
 # 리스트 5-1-(7)
 # 평균 제곱 오차의 기울기 ------------------------
-def dmse_line(x, t, w):
+def dmse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1])
     y = w[0] * x + w[1]
     d_w0 = 2 * np.mean((y - t) * x)
     d_w1 = 2 * np.mean(y - t)
@@ -139,12 +139,13 @@ d_w = dmse_line(X, T, [10, 165])
 print(np.round(d_w, 1))
 
 # 리스트 5-1-(9)
-# 구배법 ------------------------------------
-def fit_line_num(x, t):
+# 경사하강법  ------------------------------------
+def fit_line_num(x, t):   # x=X; t=T
     w_init = [10.0, 165.0] # 초기 매개 변수
     alpha = 0.001 # 학습률
     i_max = 100000 # 반복의 최대 수
     eps = 0.1 # 반복을 종료 기울기의 절대 값의 한계
+
     w_i = np.zeros([i_max, 2])
     w_i[0, :] = w_init
     for i in range(1, i_max):
@@ -158,6 +159,13 @@ def fit_line_num(x, t):
     w_i = w_i[:i, :]
     return w0, w1, dmse, w_i
 
+#  w0, w1, dmse, w_i 확인
+# (1.5399473562672923,
+# 136.1761603274906,
+#(-0.005793591015883948, 0.09999091251416559),
+# array([[ 10.        , 165.        ],
+#        [  4.95371356, 164.69820279],
+#        [  2.4301957 , 164.54258086],
 
 # 메인 ------------------------------------
 plt.figure(figsize=(4, 4)) # MSE의 등고선 표시
@@ -175,15 +183,25 @@ cont = plt.contour(xx0, xx1, J, 30, colors='black',
                    levels=(100, 1000, 10000, 100000))
 cont.clabel(fmt='%1.0f', fontsize=8) 
 plt.grid(True)
-# 구배법 호출
+
+# 경사하강법 호출
+# 디버깅 포인트
 W0, W1, dMSE, W_history = fit_line_num(X, T)
 # 결과보기
 print('반복 횟수 {0}'.format(W_history.shape[0]))
 print('W=[{0:.6f}, {1:.6f}]'.format(W0, W1))
 print('dMSE=[{0:.6f}, {1:.6f}]'.format(dMSE[0], dMSE[1]))
 print('MSE={0:.6f}'.format(mse_line(X, T, [W0, W1])))
+
+# 디버깅 포인트
 plt.plot(W_history[:, 0], W_history[:, 1], '.-',
          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+# W_history[0, 0], W_history[0, 1] 부터 먼저 시작
+# plt.plot(W_history[0, 0], W_history[0, 1], '.-',
+#     ...:          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+
+# np.round([W_history[1, 0], W_history[1, 1]], 2)
+# array([  4.95, 164.7 ])
 plt.show()
 
 # 리스트 5-1-(10)
@@ -219,7 +237,7 @@ def fit_line(x, t):
     w1 = mt - w0 * mx
     return np.array([w0, w1])
 
-# 메인 ------------------------------------
+# 메인 (기존) ------------------------------------
 W = fit_line(X, T)
 print("w0={0:.3f}, w1={1:.3f}".format(W[0], W[1]))
 mse = mse_line(X, T, W)
@@ -232,6 +250,39 @@ plt.xlim(X_min, X_max)
 plt.grid(True)
 plt.show()
 
+# 메인 (변경) ------------------------------------
+if  __name__ == '__main__':  # 리스트 5-1-(8)
+    d_w = dmse_line(X, T, [10, 165])
+    print(np.round(d_w, 1))
+
+    # 수치해 메인 ------------------------------------
+    plt.figure(figsize=(4, 4))
+    W=np.array([W0, W1])
+    mse = mse_line(X, T, W)
+    print("수치해: w0={0:.3f}, w1={1:.3f}".format(W0, W1))
+    # mse = mse_line(X, T, W)
+    print("수치해: SD={0:.3f} cm".format(np.sqrt(mse)))
+    show_line(W)
+    plt.plot(X, T, marker='o', linestyle='None',
+             color='cornflowerblue', markeredgecolor='black')
+    plt.xlim(X_min, X_max)
+    plt.grid(True)
+    plt.show()
+
+    # 해석해 메인 ------------------------------------
+    W = fit_line(X, T)
+    print("해석해: w0={0:.3f}, w1={1:.3f}".format(W[0], W[1]))
+    mse = mse_line(X, T, W)
+    print("해석해: SD={0:.3f} cm".format(np.sqrt(mse)))
+    plt.figure(figsize=(4, 4))
+    show_line(W)
+    plt.plot(X, T, marker='o', linestyle='None',
+             color='cornflowerblue', markeredgecolor='black')
+    plt.xlim(X_min, X_max)
+    plt.grid(True)
+    plt.show()
+
+
 # 리스트 5-1-(12)
 # 2차원 데이터 생성 --------------------------
 X0 = X
@@ -243,9 +294,9 @@ X1_min = 40
 X1_max = 75
 
 # 리스트 5-1-(13)
-print(np.round(X0, 2))
-print(np.round(X1, 2))
-print(np.round(T, 2))
+print('X0[나이]= ', np.round(X0, 2))
+print('X1[몸무게]= ', np.round(X1, 2))
+print('T[키]= ', np.round(T, 2))
 
 # 리스트 5-1-(14)
 # 2차원 데이터의 표시 ------------------------
@@ -253,6 +304,12 @@ def show_data2(ax, x0, x1, t):
     for i in range(len(x0)):
         ax.plot([x0[i], x0[i]], [x1[i], x1[i]],
                 [120, t[i]], color='gray')
+        # x0[i], x0[i]
+        # (15.42555011756435, 15.42555011756435)
+        # x1[i], x1[i]
+        # (70.43231869836629, 70.43231869836629)
+        # 120, t[i]
+        # (120, 170.91013144599378)
         ax.plot(x0, x1, t, 'o',
                 color='cornflowerblue', markeredgecolor='black',
                 markersize=6, markeredgewidth=0.5)
@@ -623,5 +680,6 @@ plt.figure(figsize=(5, 3))
 plt.bar(M, SD, tick_label=label, align="center",
 facecolor="cornflowerblue")
 plt.show()
+
 
 
