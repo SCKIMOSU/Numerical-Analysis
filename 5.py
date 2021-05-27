@@ -251,7 +251,7 @@ for i0 in range(xn):
         J[i1, i0] = mse_line(X, T, (x0[i0], x1[i1]))
 cont = plt.contour(xx0, xx1, J, 30, colors='black',
                    levels=(100, 1000, 10000, 100000))
-cont.clabel(fmt='%1.0f', fontsize=8) 
+cont.clabel(fmt='%1.0f', fontsize=8)
 plt.grid(True)
 
 
@@ -290,9 +290,9 @@ mse = mse_line(X, T, W)
 print("w0={0:.3f}, w1={1:.3f}".format(W0, W1))
 # mse = mse_line(X, T, W)
 print("SD={0:.3f} cm".format(np.sqrt(mse)))
-show_line(W) 
+show_line(W)
 plt.plot(X, T, marker='o', linestyle='None',
-         color='cornflowerblue', markeredgecolor='black') 
+         color='cornflowerblue', markeredgecolor='black')
 plt.xlim(X_min, X_max)
 plt.grid(True)
 plt.show()
@@ -344,10 +344,10 @@ if  __name__ == '__main__':  # 리스트 5-1-(8)
 
     # 해석해 메인 ------------------------------------
     W = fit_line(X, T)
-    
+
     # 수치해 W: array([  1.53994736, 136.17616033])
     # 해석해 W: array([  1.55757515, 135.87192426])
-    
+
     print("해석해: w0={0:.3f}, w1={1:.3f}".format(W[0], W[1]))
     mse = mse_line(X, T, W)
     print("해석해: SD={0:.3f} cm".format(np.sqrt(mse)))
@@ -362,6 +362,7 @@ if  __name__ == '__main__':  # 리스트 5-1-(8)
 
 # 리스트 5-1-(12)
 # 2차원 데이터 생성 --------------------------
+# X1: 나이, X2: 몸무게 (새롭게 생성함), T: 키
 X0 = X
 X0_min = 5
 X0_max = 30
@@ -407,7 +408,7 @@ def show_plane(ax, w):
     px0, px1 = np.meshgrid(px0, px1)
     y = w[0]*px0 + w[1] * px1 + w[2]
     ax.plot_surface(px0, px1, y, rstride=1, cstride=1, alpha=0.3,
-                    color='blue', edgecolor='black') 
+                    color='blue', edgecolor='black')
 
 #면의 MSE -----------------------------------
 def mse_plane(x0, x1, t, w):
@@ -419,7 +420,7 @@ def mse_plane(x0, x1, t, w):
 plt.figure(figsize=(6, 5))
 ax = plt.subplot(1, 1, 1, projection='3d')
 W = [1.5, 1, 90]
-show_plane(ax, W) 
+show_plane(ax, W)
 show_data2(ax, X0, X1, T)
 mse = mse_plane(X0, X1, T, W)
 print("SD={0:.3f} cm".format(np.sqrt(mse)))
@@ -436,7 +437,7 @@ def fit_plane(x0, x1, t):
     w0 = (c_tx1 * c_x0x1 - v_x1 * c_tx0) / (c_x0x1**2 - v_x0 * v_x1)
     w1 = (c_tx0 * c_x0x1 - v_x0 * c_tx1) / (c_x0x1**2 - v_x0 * v_x1)
     w2 = -w0 * np.mean(x0) - w1 * np.mean(x1) + np.mean(t)
-    return np.array([w0, w1, w2]) 
+    return np.array([w0, w1, w2])
 
 
 # 메인 ------------------------------------
@@ -514,8 +515,8 @@ def fit_gauss_func(x, t, m):
     for j in range(m):
         psi[:, j] = gauss(x, mu[j], s)
     psi_T = np.transpose(psi)
-    
-    
+
+
     b = np.linalg.inv(psi_T.dot(psi))
     c = b.dot(psi_T)
     w = c.dot(t)
@@ -526,7 +527,7 @@ def fit_gauss_func(x, t, m):
 def show_gauss_func(w):
     xb = np.linspace(X_min, X_max, 100)
     y = gauss_func(w, xb)
-    plt.plot(xb, y, c=[.5, .5, .5], lw=4) 
+    plt.plot(xb, y, c=[.5, .5, .5], lw=4)
 
 
 # 메인 ----------------------------------
@@ -557,8 +558,8 @@ for i in range(len(M)):
     plt.grid(True)
     plt.ylim(130, 180)
     mse = mse_gauss_func(X, T, W)
-    
-    
+
+
     plt.title("M={0:d}, SD={1:.1f}".format(M[i], np.sqrt(mse)))
 plt.show()
 
@@ -608,7 +609,7 @@ plt.show()
 plt.figure(figsize=(5, 4))
 M = range(2, 10)
 mse_train = np.zeros(len(M))
-mse_test = np.zeros(len(M)) 
+mse_test = np.zeros(len(M))
 for i in range(len(M)):
     W = fit_gauss_func(X_train, T_train, M[i])
     mse_train[i] = np.sqrt(mse_gauss_func(X_train, T_train, W))
@@ -687,14 +688,14 @@ plt.show()
 # 모델 A -----------------------------------
 def model_A(x, w):
     y = w[0] - w[1] * np.exp(-w[2] * x)
-    return y 
+    return y
 
 
 # 모델 A 표시 -------------------------------
 def show_model_A(w):
     xb = np.linspace(X_min, X_max, 100)
     y = model_A(xb, w)
-    plt.plot(xb, y, c=[.5, .5, .5], lw=4) 
+    plt.plot(xb, y, c=[.5, .5, .5], lw=4)
 
 
 # 모델 A의 MSE ------------------------------
@@ -704,7 +705,7 @@ def mse_model_A(w, x, t):
     return mse
 
 # 리스트 5-2-(18)
-from scipy.optimize import minimize 
+from scipy.optimize import minimize
 
 
 # 모델 A의 매개 변수 최적화 -----------------
