@@ -114,7 +114,7 @@ plt.show()
 # 리스트 5-1-(6)
 from mpl_toolkits.mplot3d import Axes3D
 # 평균 오차 함수 ------------------------------
-def mse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1])
+def mse_line(x, t, w): # 나이, 키, (나이 , w[0]), (키 , w[1]) : 튜플 자료형
     # x=X ; t=T; w= [x0[i0] , x1[i1]]  ; w[0] = -25.0; w[1]= 120.0
     y = w[0] * x + w[1] # (나이 , w[0]), (키 , w[1])
     mse = np.mean((y - t)**2)
