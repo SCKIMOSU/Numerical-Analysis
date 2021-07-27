@@ -130,7 +130,7 @@ xx0, xx1 = np.meshgrid(x0, x1) # 전수검사
 J = np.zeros((len(x0), len(x1)))
 for i0 in range(xn):
     for i1 in range(xn):
-        J[i1, i0] = mse_line(X, T, (x0[i0], x1[i1]))
+        J[i1, i0] = mse_line(X, T, (x0[i0], x1[i1])) # 튜플 자료형
         #  나이, 키, (나이 , w[0]), (키 , w[1])
 # 표시 --------------------------------------
 plt.figure(figsize=(9.5, 4))
