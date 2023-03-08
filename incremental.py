@@ -8,7 +8,7 @@ def incsearch(func, xmin, xmax):
     xb=[]
 
     for k in np.arange(np.size(x)-1):
-        if np.sign(f[k]) != np.sign(f[k+1]):
+        if np.sign(f[k]) != np.sign(f[k+1]):  # k=141
             nb=nb+1
             xb.append(x[k])
             xb.append(x[k+1])
