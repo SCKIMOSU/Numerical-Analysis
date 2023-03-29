@@ -31,6 +31,7 @@ plt.figure(2)
 plt.plot(x,y, 'o')
 plt.plot(x, np.polyval(p1, x), 'b*-')
 # = plt.plot(x,fx, 'r*-')
+plt.show()
 
 
 plt.figure(3)
@@ -39,11 +40,12 @@ plt.plot(x, np.polyval(p1,x), 'r*-')
 plt.plot(x, np.polyval(p2,x), 'b>-')
 plt.plot(x, np.polyval(p3,x), 'mx-')
 plt.plot(x, np.polyval(p4,x), 'go-')
-
+plt.show()
 
 plt.figure(4)
 plt.plot(x, y, 'o')
 plt.grid()
+plt.show()
 xp=np.linspace(-2, 6, 100)
 
 plt.plot(xp, np.polyval(p1,xp), 'r-')
@@ -56,7 +58,7 @@ plt.plot(xp, np.polyval(p2,xp), 'b--') # --: dached line
 
 plt.plot(xp, np.polyval(p3,xp), 'm:')
 plt.plot(xp, np.polyval(p4,xp), 'g.')
-
+plt.show()
 
 
 #  new example
@@ -66,7 +68,7 @@ y = np.array([25, 70, 380, 550, 610, 1220, 830, 1450])
 plt.figure(5)
 plt.plot(x, y, 'ro-')
 plt.grid()
-
+plt.show()
 xsum=np.sum(x)
 ysum=np.sum(y)
 # 360.0
@@ -85,7 +87,7 @@ y1=a1*x+a0
 plt.figure(6)
 plt.plot(x, y, 'ro-', x, y1, 'b*-')
 plt.grid()
-
+plt.show()
 ##########
 
 
@@ -116,23 +118,24 @@ p3=np.polyfit(x, y, 3)
 plt.figure(7)
 plt.plot(x,y, 'o')
 plt.plot(x,fx, 'r*-')
-
+plt.show()
 plt.figure(8)
 plt.plot(x,y, 'o')
 plt.plot(x, np.polyval(p1, x), 'b*-')
 # = plt.plot(x,fx, 'r*-')
-
+plt.show()
 
 plt.figure(9)
 plt.plot(x,y, 'o')
 plt.plot(x, np.polyval(p1,x), 'r*-')
 plt.plot(x, np.polyval(p2,x), 'b>-')
 plt.plot(x, np.polyval(p3,x), 'mx-')
-
+plt.show()
 
 plt.figure(10)
 plt.plot(x, y, 'o')
 plt.grid()
+plt.show()
 xp=np.linspace(-2, 6, 100)
 
 plt.plot(xp, np.polyval(p1,xp), 'r-') # p1 from np.polyfit, plot(x, p1 with
@@ -143,7 +146,7 @@ plt.plot(xp, np.polyval(p2,xp), 'b--') # --: dached line
 # np.polyval(p2,x)=array([ 0.22142857,0.58, 0.27714286, -0.34714286,
 # - 1.29285714])
 plt.plot(xp, np.polyval(p3,xp), 'm:')
-
+plt.show()
 
 
 #  new example
@@ -153,7 +156,7 @@ y = np.array([25, 70, 380, 550, 610, 1220, 830, 1450])
 plt.figure(11)
 plt.plot(x, y, 'ro:')
 plt.grid()
-
+plt.show()
 xsum=np.sum(x)
 ysum=np.sum(y)
 # 360.0
@@ -172,7 +175,7 @@ y1=a1*x+a0
 plt.figure(12)
 plt.plot(x, y, 'ro:', x, y1, 'b*-')
 plt.grid()
-
+plt.show()
 #################################
 x=np.array([0, 1, 2, 3, 4, 5])
 y=np.array([0, 0.8, 0.9, 0.1, -0.8, -1])
@@ -184,7 +187,7 @@ fx=p1[0]*x+p1[1]
 
 plt.figure(13)
 plt.plot(x, fx, 'r*-')
-
+plt.show()
 p2=np.polyfit(x, y, 2)
 plt.plot(x, p2[0]*x**2+p2[1]*x+p2[2], 'b>:')
 
@@ -200,7 +203,7 @@ plt.plot(xp, p1[0]*xp+p1[1], 'r-')
 plt.plot(xp, p2[0]*xp**2+p2[1]*xp+p2[2], 'b>:')
 plt.plot(xp, p3[0]*xp**3+p3[1]*xp**2+p3[2]*xp+p3[3], 'm:')
 plt.show()
-
+plt.show()
 x = np.arange(10, 90, 10.)
 y = np.array([25, 70, 380, 550, 610, 1220, 830, 1450])
 
