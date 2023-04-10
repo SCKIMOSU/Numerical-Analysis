@@ -37,14 +37,11 @@ mu = 0.4
 # k = 0
 x = 0
 plt.plot(x, f1(x), 'go', markersize=10)
-#plt.show()
 plt.text(x + 0.1, f1(x) + 0.1, "1차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # f1(x)에서 접선 긋기
-
 # plt.plot(xx, f1d(x)*xx, 'r--') 직선을 평행이동한 것
 # x축으로 0 만큼, y축으로 6 만큼 평행이동한 직선이 접선이 됨
-
 # f1d(x) * (xx[0] - x) + f1(x)   : 10
 # f1d(x) * (xx[1] - x) + f1(x)  : 9.8
 # f1d(x) * (xx[2] - x) + f1(x)  : 9.6
@@ -56,6 +53,10 @@ x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
 plt.text(x - 0.2, f1(x) + 0.4, "2차 시도" )
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
+# plt.plot(xx, f1d(x)*xx, 'm--') 직선을 평행이동한 것
+# x축으로 1.6 만큼, y축으로 2.16 만큼 평행이동한 직선이 접선이 됨
+
+plt.show()
 print("2차 시도: x_2 = {:.2f}, g_2 = {:.2f}".format(x, f1d(x)))
 
 # k = 2
@@ -63,6 +64,9 @@ x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
 plt.text(x - 0.2, f1(x) - 0.7, "3차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
+# plt.plot(xx, f1d(x)*xx, 'c--') 직선을 평행이동한 것
+# x축으로 1.92 만큼, y축으로 2.0064 만큼 평행이동한 직선이 접선이 됨
+
 print("3차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
 
@@ -233,7 +237,7 @@ plt.show()
 '''
 
 x, y = -1, -1
-for i in range(5): # 5000 
+for i in range(5): # 5000
     g = f2g(x, y)
     plt.arrow(x, y, -s * mu * g[0], -s * mu * g[1],
               head_width=0.04, head_length=0.04, fc='k', ec='k', lw=2)
