@@ -41,6 +41,10 @@ plt.plot(x, f1(x), 'go', markersize=10)
 plt.text(x + 0.1, f1(x) + 0.1, "1차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # f1(x)에서 접선 긋기
+
+# plt.plot(xx, f1d(x)*xx, 'r--') 직선을 평행이동한 것
+# x축으로 0 만큼, y축으로 6 만큼 평행이동한 직선이 접선이 됨
+
 # f1d(x) * (xx[0] - x) + f1(x)   : 10
 # f1d(x) * (xx[1] - x) + f1(x)  : 9.8
 # f1d(x) * (xx[2] - x) + f1(x)  : 9.6
