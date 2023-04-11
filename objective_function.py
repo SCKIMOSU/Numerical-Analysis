@@ -110,6 +110,15 @@ plt.text(x - 1.2, f1(x) - 0.7, "3차 시도")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("3차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
+# k = 3 
+x = x - mu * f1d(x)
+plt.plot(x, f1(x), 'go', markersize=10)
+plt.text(x - 1.2, f1(x) - 0.7, "4차 시도")
+plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
+print("4차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
+
+
+
 plt.ylim(0, 15)
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
