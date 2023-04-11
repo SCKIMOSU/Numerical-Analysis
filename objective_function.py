@@ -2,8 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.rc('font', family='Malgun Gothic')
-plt.rc('axes', unicode_minus=False)
+
+
 # 그런데 보통 한글 글꼴에는 유니코드 마이너스(−)가 없고
 # 일반 마이너스(-) 기호만 있습니다.
 # 눈으로 보기에는 비슷해보이지만 다른 글자입니다.
@@ -18,7 +18,7 @@ plt.plot(2, 2, 'ro', markersize=10)
 plt.ylim(0, 10)
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
-plt.title("1차원 목적함수")
+plt.title("Objective Function")
 plt.show()
 
 
@@ -37,7 +37,7 @@ mu = 0.4
 # k = 0
 x = 0
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x + 0.1, f1(x) + 0.1, "1차 시도")
+plt.text(x + 0.1, f1(x) + 0.1, "1st trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # f1(x)에서 접선 긋기
 # plt.plot(xx, f1d(x)*xx, 'r--') 직선을 평행이동한 것
@@ -46,12 +46,12 @@ plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # f1d(x) * (xx[1] - x) + f1(x)  : 9.8
 # f1d(x) * (xx[2] - x) + f1(x)  : 9.6
 # f1d(x) * (xx[99] - x) + f1(x) : -10
-print("1차 시도: x_1 = {:.2f}, g_1 = {:.2f}".format(x, f1d(x)))
+print("1st trial: x_1 = {:.2f}, g_1 = {:.2f}".format(x, f1d(x)))
 
 # k = 1
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 0.2, f1(x) + 0.4, "2차 시도" )
+plt.text(x - 0.2, f1(x) + 0.4, "2nd trial" )
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # plt.plot(xx, f1d(x)*xx, 'm--') 직선을 평행이동한 것
 # x축으로 1.6 만큼, y축으로 2.16 만큼 평행이동한 직선이 접선이 됨
@@ -62,7 +62,7 @@ print("2차 시도: x_2 = {:.2f}, g_2 = {:.2f}".format(x, f1d(x)))
 # k = 2
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 0.2, f1(x) - 0.7, "3차 시도")
+plt.text(x - 0.2, f1(x) - 0.7, "3rd trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # plt.plot(xx, f1d(x)*xx, 'c--') 직선을 평행이동한 것
 # x축으로 1.92 만큼, y축으로 2.0064 만큼 평행이동한 직선이 접선이 됨
@@ -74,7 +74,7 @@ print("3차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
-plt.title("최대경사법을 사용한 1차함수의 최적화")
+plt.title("optimization by gradient descent")
 plt.ylim(0, 10)
 plt.show()
 
@@ -92,28 +92,28 @@ mu = 1.1
 x = 0
 
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x + 0.2, f1(x) + 0.1, "1차 시도")
+plt.text(x + 0.2, f1(x) + 0.1, "1st trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("1차 시도: x_1 = {:.2f}, g_1 = {:.2f}".format(x, f1d(x)))
 
 # k = 1
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x + 0.2, f1(x) + 0.4, "2차 시도")
+plt.text(x + 0.2, f1(x) + 0.4, "2nd trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("2차 시도: x_2 = {:.2f}, g_2 = {:.2f}".format(x, f1d(x)))
 
 # k = 2
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 1.2, f1(x) - 0.7, "3차 시도")
+plt.text(x - 1.2, f1(x) - 0.7, "3rd trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("3차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
-# k = 3 
+# k = 3
 x = x - mu * f1d(x)
 plt.plot(x, f1(x), 'go', markersize=10)
-plt.text(x - 1.2, f1(x) - 0.7, "4차 시도")
+plt.text(x - 1.2, f1(x) - 0.7, "4th trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 print("4차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 
@@ -122,7 +122,7 @@ print("4차 시도: x_3 = {:.2f}, g_3 = {:.2f}".format(x, f1d(x)))
 plt.ylim(0, 15)
 plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
-plt.title("최대경사법을 사용한 1차함수의 최적화 (스텝 사이즈가 너무 큰 경우)")
+plt.title("optimization by gradient descent with large step size")
 plt.show()
 
 
@@ -147,7 +147,7 @@ plt.xticks(np.linspace(-4, 4, 9))
 plt.yticks(np.linspace(-3, 3, 7))
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.title("2차원 로젠브록 함수 $f(x,y)$")
+plt.title(" Rosenbrock Function $f(x,y)$")
 plt.show()
 
 # https://frhyme.github.io/python-lib/python_contour/
@@ -259,7 +259,7 @@ plt.xticks(np.linspace(-3, 3, 7))
 plt.yticks(np.linspace(-2, 2, 5))
 plt.xlabel("x")
 plt.ylabel("y")
-plt.title("최대경사법을 사용한 2차함수의 최적화" )
+plt.title("Gradient Descent" )
 plt.show()
 
 
@@ -295,5 +295,5 @@ plt.xticks(np.linspace(0, 3, 4))
 plt.yticks(np.linspace(0, 2, 3))
 plt.xlabel("x")
 plt.ylabel("y")
-plt.title("최대경사법을 사용한 2차함수의 최적화 (진동 현상)" )
+plt.title("Gradient Descent Oscillation" )
 plt.show()
