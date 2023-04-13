@@ -55,8 +55,6 @@ plt.text(x - 0.2, f1(x) + 0.4, "2nd trial" )
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
 # plt.plot(xx, f1d(x)*xx, 'm--') 직선을 평행이동한 것
 # x축으로 1.6 만큼, y축으로 2.16 만큼 평행이동한 직선이 접선이 됨
-
-plt.show()
 print("2차 시도: x_2 = {:.2f}, g_2 = {:.2f}".format(x, f1d(x)))
 
 # k = 2
