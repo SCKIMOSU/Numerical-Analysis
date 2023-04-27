@@ -302,9 +302,17 @@ print('MSE={0:.6f}'.format(mse_line(X, T, [W0, W1])))
 # 디버깅 포인트
 plt.plot(W_history[:, 0], W_history[:, 1], '.-',
          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+
+# plt.plot(W_history[0:100, 0], W_history[0:100, 1], '.-',  [0에서 100까지 히스토리를 찍어보기]
+ #        color='gray', markersize=10, markeredgecolor='cornflowerblue')
 # W_history[0, 0], W_history[0, 1] 부터 먼저 시작
 # plt.plot(W_history[0, 0], W_history[0, 1], '.-',
 #     ...:          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+# np.round([W_history[1, 0], W_history[1, 1]], 2)
+# array([  4.95, 164.7 ])
+
+plt.show()
+
 
 # np.round([W_history[1, 0], W_history[1, 1]], 2)
 # array([  4.95, 164.7 ])
