@@ -8,6 +8,7 @@ plt.hist(s,5)
 plt.figure(5)
 plt.hist(s,4, color='g')
 plt.grid()
+plt.show()
 
 # plt.bar()히스토그램 그리기
 smin=s.min()
@@ -71,6 +72,7 @@ plt.hist(s, bins=4, color='c', alpha=0.75)
 plt.title('Histrogram')
 plt.ylabel('Count')
 plt.grid()
+plt.show()
 
 # 이산신호: Probability Mass Function (pmf: 확률질량함수)
 # s : 25개는 이산신호로 pmf를 사용하는 것이 맞음
@@ -92,7 +94,7 @@ plt.bar(bins_left, pdf, bin_width)
 plt.title('Bar')
 plt.ylabel('pdf')
 plt.grid()
-
+plt.show()
 
 plt.figure(9)
 plt.plot(bins_left, pdf, 'b*-')
@@ -117,16 +119,19 @@ plt.show()
 
 # 더 많은 데이터 셋에 대해 확률 밀도 함수를 적용
 x3=np.random.randn(10000)
-plt.figure(11)
+#plt.figure(11)
 plt.subplot(2, 1, 1)
 n3, bins3, patches3 = plt.hist(x3, bins=50, color='b', alpha=0.75)
 plt.title('Histrogram')
 plt.ylabel('Count')
+
 plt.subplot(2, 1, 2)
-n4, bins4, patches4 = plt.hist(x3, 50, normed=1, facecolor='b', alpha=0.75)
+pdf1=n3/np.size(x3)
+plt.plot(bins3[:-1], pdf1, 'b*-')
+#n4, bins4, patches4 = plt.hist(pdf1, bins=50, color='b', alpha=0.75)
 plt.xlabel('Probability Density Function')
 plt.ylabel('Probability')
-
+plt.show()
 
 # 더 많은 데이터 셋에 대해 plt.bar()함수로 확률 밀도 함수 구현
 nd=np.random.randn(10000)
