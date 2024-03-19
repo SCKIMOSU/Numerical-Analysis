@@ -12,11 +12,11 @@ def bisect(func, xl, xu):
 
     while (1):
         xrold=xr
-        xr=np.float((xl+xu)/2)
+        xr=((xl+xu)/2)
         iter=iter+1
 
         if xr != 0:  # 나누기에서 분모가 0이면 안 되죠. 0으로 나누는 것은 ZeroDivisionError: division by zero 가 발생하죠 
-            ea=np.float(np.abs(np.float(xr)-np.float(xrold))/np.float(xr))*100
+            ea=(np.abs((xr)-(xrold))/(xr))*100
 
         test=func(xl)*func(xr)
 
@@ -27,7 +27,7 @@ def bisect(func, xl, xu):
         else:
             ea=0
 
-        if np.int(ea<es) | np.int(iter >= maxit):
+        if (ea<es) |(iter >= maxit):
             break
 
     root=xr
@@ -40,6 +40,9 @@ if __name__ == '__main__':
     fm=lambda m: np.sqrt(9.81*m/0.25)*np.tanh(np.sqrt(9.81*0.25/m)*4)-36
     root, fx, ea, iter=bisect(fm, 40, 200)
     print('root = ', root, '(Bisection)')
+    print('f(root) = ', fx, '(must be zero, Bisection)')
+    print('estimated error= ', ea, '(must be zero error, Bisection)')
+    print('iterated number to find root =', iter, '(Bisection)')
     print('f(root) = ', fx, '(must be zero, Bisection)')
     print('estimated error= ', ea, '(must be zero error, Bisection)')
     print('iterated number to find root =', iter, '(Bisection)')
