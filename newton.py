@@ -14,15 +14,15 @@ def newton_raphson(func, dfunc, xr, xt):
 
     while (1):
         xrold = xr
-        xr = np.float(xr - func(xr) / dfunc(xr))
+        xr = float(xr - func(xr) / dfunc(xr))
 
         iter = iter + 1
 
         if xr != 0:
-            ea = np.float(np.abs((np.float(xr) - np.float(xrold)) / np.float(xr)) * 100)
-            et= np.float(np.abs((np.float(xt) - np.float(xr)) / np.float(xt)) * 100)
+            ea = float(np.abs((float(xr) - float(xrold)) / float(xr)) * 100)
+            et= float(np.abs((float(xt) - float(xr)) / float(xt)) * 100)
 
-        if np.int(ea <= es) | np.int(iter >= maxit):
+        if int(ea <= es) | int(iter >= maxit):
             break
 
         root = xr
