@@ -30,7 +30,8 @@ def f1d(x):
 xx = np.linspace(-1, 4, 100)
 
 plt.plot(xx, f1(xx), 'k-')
-
+plt.show()
+#plt.hold('on')
 # step size
 mu = 0.4
 
@@ -39,6 +40,9 @@ x = 0
 plt.plot(x, f1(x), 'go', markersize=10)
 plt.text(x + 0.1, f1(x) + 0.1, "1st trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
+plt.show()
+#plt.hold('on')
+
 # f1(x)에서 접선 긋기
 # plt.plot(xx, f1d(x)*xx, 'r--') 직선을 평행이동한 것
 # x축으로 0 만큼, y축으로 6 만큼 평행이동한 직선이 접선이 됨
@@ -208,6 +212,21 @@ ax.contourf(X,Y,Z)
 plt.show()
 
 ##########
+# 스텝 사이즈에 따른 수렴 정도 차이 그래프 그려 보기
+# 스템 사이즈 :
+# 아주 작은 경우  2e-4, 아직 수렴하지 못함 5000
+# 적당한 경우 : 2e-3   수렴  5000
+# 큰  경우 : 5e-3  발산 5000,
+# figure(10), figure(11), figure(12)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 2차원 로젠브록 함수
+def f2(x, y):
+    return (1 - x)**2 + 100.0 * (y - x**2)**2
+
+
 def f2g(x, y):
     """f2(x, y)의 도함수"""
     # 2차원 로젠브록 함수의 도함수
@@ -224,12 +243,13 @@ Z = f2(X, Y)
 
 levels = np.logspace(-1, 3, 10)
 
+plt.figure(11)
 plt.contourf(X, Y, Z, alpha=0.2, levels=levels)
 plt.contour(X, Y, Z, colors="green", levels=levels, zorder=0)
 plt.plot(1, 1, 'ro', markersize=10)
 #plt.show() # debug 시에만 사용할 것
 
-mu = 8e-4  # step size
+mu = 2e-4  # step size  8e-4
 s = 0.95  # for arrowhead drawing
 
 '''''''''
@@ -244,12 +264,13 @@ plt.show()
 '''
 
 x, y = -1, -1
-for i in range(5): # 5000
+for i in range(100): # 5000
     g = f2g(x, y)
     plt.arrow(x, y, -s * mu * g[0], -s * mu * g[1],
               head_width=0.04, head_length=0.04, fc='k', ec='k', lw=2)
     x = x - mu * g[0]
     y = y - mu * g[1]
+
 
 plt.xlim(-3, 3)
 plt.ylim(-2, 2)
@@ -260,6 +281,9 @@ plt.ylabel("y")
 plt.title("Gradient Descent" )
 plt.show()
 
+
+# 스텝 사이즈에 따른 수렴 정도 차이 그래프 그려 보기 끝
+##########
 
 
 plt.figure(100)
