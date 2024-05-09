@@ -22,10 +22,10 @@ X_n = 16 # X의 상한(표시 용)
 X = 5 + 25 * np.random.rand(X_n)
 # https://nittaku.tistory.com/443
 #
-# np.random.rand(X_n) --> [0,1] @ 100%
+# np.random.rand(X_n) --> [0,1] @ 100%  uniform distribution
 #  25 * [0,1] @ 100%  --> [0,25] @ 100%
 #  5 + [0,25] @ 100% --> [5,30] @ 100%
-# 따라서 X는 5에서 30세에 100% 가 나타나는 균등 분포
+# 따라서 X는 5에서 30세에 100% 가 나타나는 균등 분포 (uniform distribution)
 
 Prm_c = [170, 108, 0.2] # 생성 매개 변수
 T = Prm_c[0] - Prm_c[1] * np.exp(-Prm_c[2] * X) \
