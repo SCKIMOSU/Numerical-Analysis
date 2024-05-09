@@ -31,6 +31,7 @@ Prm_c = [170, 108, 0.2] # 생성 매개 변수
 T = Prm_c[0] - Prm_c[1] * np.exp(-Prm_c[2] * X) \
 + 4 * np.random.randn(X_n) # (A)
 
+# np.random.randn(X_n) : 정규분포 normal distribution 
 # Prm_c[1] * np.exp(-Prm_c[2] * X) 이 부분이 170 cm 에서
 # X: [5,30] @ 100%
 # Prm_c[2] * X :  0.2 * [5,30] @ 100% = [1,6] @ 100%
