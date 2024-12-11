@@ -114,51 +114,55 @@ def get_model_with_ransac(data, polynomial_degree, threshold, sample_size,
 
     return early_stop_flag, best_fit
 
-# Generate synthetic data
-np.random.seed(0)
-n_points = 100
-X = np.linspace(0, 10, n_points)
-y = 3 * X + 10 + np.random.normal(0, 3, n_points)
 
-# Add outliers
-n_outliers = 20
-X[-n_outliers:] += int(30 * np.random.rand())
-y[-n_outliers:] -= int(50 * np.random.rand())
-X = np.expand_dims(X, -1)
-y = np.expand_dims(y, -1)
-data = np.hstack([X, y])
+if __name__ == "__main__":
+    # Generate synthetic data
+    np.random.seed(0)
+    n_points = 100
+    X = np.linspace(0, 10, n_points)
+    y = 3 * X + 10 + np.random.normal(0, 3, n_points)
 
-threshold_cadidates = [1, 2, 4, 8, 16, 32, 64, 128]
-threshold_cadidates.sort()
+    # Add outliers
+    n_outliers = 20
+    X[-n_outliers:] += int(30 * np.random.rand())
+    y[-n_outliers:] -= int(50 * np.random.rand())
+    X = np.expand_dims(X, -1)
+    y = np.expand_dims(y, -1)
+    data = np.hstack([X, y])
 
-sample_size = 2
-max_iteration = get_sampling_number(sample_size)
-threshold = get_inlier_threshold(threshold_cadidates, data, polynomial_degree=1, sample_size=sample_size,
-                                 min_iteration=-1, max_iteration=max_iteration, stop_inlier_ratio=0.50,
-                                 verbose=True)
+    threshold_cadidates = [1, 2, 4, 8, 16, 32, 64, 128]
+    threshold_cadidates.sort()
+
+    sample_size = 2
+    max_iteration = get_sampling_number(sample_size)
+    threshold = get_inlier_threshold(threshold_cadidates, data, polynomial_degree=1, sample_size=sample_size,
+                                     min_iteration=-1, max_iteration=max_iteration, stop_inlier_ratio=0.50,
+                                     verbose=True)
 
 
 
-# Generate synthetic data
-np.random.seed(0)
-n_points = 100
-X = np.linspace(-10, 10, n_points)
-y = 2 * X ** 2 + 3 * X + 4 + np.random.normal(0, 10, n_points)
+    # Generate synthetic data
+    np.random.seed(0)
+    n_points = 100
+    X = np.linspace(-10, 10, n_points)
+    y = 2 * X ** 2 + 3 * X + 4 + np.random.normal(0, 10, n_points)
 
-# Add outliers
-n_outliers = 20
-X[-n_outliers:] += int(30 * np.random.rand())
-y[-n_outliers:] -= int(500 * np.random.rand())
+    # Add outliers
+    n_outliers = 20
+    X[-n_outliers:] += int(30 * np.random.rand())
+    y[-n_outliers:] -= int(500 * np.random.rand())
 
-X = np.expand_dims(X, -1)
-y = np.expand_dims(y, -1)
-data = np.hstack([X, y])
+    X = np.expand_dims(X, -1)
+    y = np.expand_dims(y, -1)
+    data = np.hstack([X, y])
 
-threshold_cadidates = [1, 2, 4, 8, 16, 32, 64, 128]
-threshold_cadidates.sort()
+    threshold_cadidates = [1, 2, 4, 8, 16, 32, 64, 128]
+    threshold_cadidates.sort()
 
-sample_size = 3
-max_iteration = get_sampling_number(sample_size)
-threshold = get_inlier_threshold(
-    threshold_cadidates, data, polynomial_degree=2, sample_size=sample_size,
-    min_iteration=-1, max_iteration=max_iteration, stop_inlier_ratio=0.50, verbose=True)
+    sample_size = 3
+    max_iteration = get_sampling_number(sample_size)
+    threshold = get_inlier_threshold(
+        threshold_cadidates, data, polynomial_degree=2, sample_size=sample_size,
+        min_iteration=-1, max_iteration=max_iteration, stop_inlier_ratio=0.50, verbose=True)
+
+
