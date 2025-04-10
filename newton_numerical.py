@@ -10,6 +10,7 @@ def dfunc_na(func, xr):
     return na_func
 
 def newton_raphson(func, dfunc, xr, xt):
+    # func=fp; dfunc=dfp; xr=200; xt
     maxit = 50
     es = 1.0e-5
     iter = 0
@@ -24,7 +25,7 @@ def newton_raphson(func, dfunc, xr, xt):
 
         if xr != 0:
             ea = float(np.abs((float(xr) - float(xrold)) / float(xr)) * 100)
-            et= float(np.abs((float(xt) - float(xr)) / float(xt)) * 100)
+            et= float(np.abs((float(xt.item() ) - float(xr)) / float(xt.item() )) * 100)
 
         if int(ea <= es) | int(iter >= maxit):
             break
