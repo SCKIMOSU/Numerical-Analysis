@@ -17,7 +17,7 @@ def hello():
     # 세션 닫기
     sess.close()
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     hello()
 
 '''''''''
