@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')  # 또는 'QtAgg', 'Agg'도 가능
+
 
 # np.polyfit(x,y,2)를 이용한 다항 회귀
 x=np.array([0,1,2,3,4,5])
@@ -31,4 +34,4 @@ plt.figure(2)
 plt.plot(x,y,'ro', x1, y1, 'b*:')
 plt.legend(['Real Data','Polynomial Regression by Partial Derivative'])
 plt.grid()
-plt.show() 
+plt.show()
