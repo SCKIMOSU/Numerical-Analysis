@@ -91,6 +91,16 @@ T = Prm_c[0] - Prm_c[1] * np.exp(-Prm_c[2] * X) \
 # [130, 169]@100% + [-4, 4]@68%
 # [126, 173]@68%
 
+import matplotlib.pyplot as plt
+
+plt.scatter(X, T, color='cornflowerblue', label='Data (T)')
+plt.plot(np.sort(X), 170 - 108 * np.exp(-0.2 * np.sort(X)), color='red', label='Mean Growth Curve')
+plt.xlabel("Age")
+plt.ylabel("Height (cm)")
+plt.title("Synthetic Height vs. Age Data")
+plt.legend()
+plt.grid(True)
+plt.show()
 
 np.savez('ch5_data.npz', X=X, X_min=X_min, X_max=X_max, X_n=X_n, T=T) # (B)
 
