@@ -333,13 +333,18 @@ def main():
     print('W=[{0:.6f}, {1:.6f}]'.format(W0, W1))
     print('dMSE=[{0:.6f}, {1:.6f}]'.format(dMSE[0], dMSE[1]))
     print('MSE={0:.6f}'.format(mse_line(X, T, [W0, W1])))
+    #
+    # # 디버깅 포인트
+    # plt.plot(W_history[:, 0], W_history[:, 1], '.-',
+    #          color='gray', markersize=10, markeredgecolor='cornflowerblue')
+    #
+    # plt.plot(W_history[0:100, 0], W_history[0:100, 1], '.-',
+    #         color='gray', markersize=10, markeredgecolor='red')  # [0에서 100까지 히스토리를 찍어보기] 빨간 테두리
+    # plt.plot(W_history[0:1000, 0], W_history[0:1000, 1], '.-',
+    #          color='gray', markersize=10, markeredgecolor='green')  # 초록 테두리 [0에서 1000까지 히스토리를 찍어보기]
+    # plt.plot(W_history[0:10000, 0], W_history[0:10000, 1], '.-',
+    #          color='gray', markersize=10, markeredgecolor='#FF69B4')  # 핑크 Hex 색상 [0에서 10000까지 히스토리를 찍어보기]
 
-    # 디버깅 포인트
-    plt.plot(W_history[:, 0], W_history[:, 1], '.-',
-             color='gray', markersize=10, markeredgecolor='cornflowerblue')
-
-    # plt.plot(W_history[0:100, 0], W_history[0:100, 1], '.-',  [0에서 100까지 히스토리를 찍어보기]
-     #        color='gray', markersize=10, markeredgecolor='cornflowerblue')
     # W_history[0, 0], W_history[0, 1] 부터 먼저 시작
     # plt.plot(W_history[0, 0], W_history[0, 1], '.-',
     #     ...:          color='gray', markersize=10, markeredgecolor='cornflowerblue')
