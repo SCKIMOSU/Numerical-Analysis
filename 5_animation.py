@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+import matplotlib
+matplotlib.use('TkAgg')  # 또는 'Qt5Agg'
+
 
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
@@ -78,3 +81,5 @@ def animate(i):
 ani = animation.FuncAnimation(fig, animate, frames=len(W_history),
                               init_func=init, blit=True, interval=300, repeat=False)
 plt.show()
+
+ani.save('gradient_descent.gif', writer='pillow', fps=2)
