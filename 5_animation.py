@@ -1,20 +1,12 @@
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # GUI 없는 환경에서도 작동하도록 설정
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-import matplotlib
-matplotlib.use('TkAgg')  # 또는 'Qt5Agg'
-
-
-import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
-
-# 이름으로 설정 시 캐시가 필요함
+# 한글 폰트 설정 (선택)
 plt.rcParams['font.family'] = 'NanumGothic'
 plt.rcParams['axes.unicode_minus'] = False
-
-
-
 
 # 데이터: 나이(x) → 키(t)
 x = np.array([10, 11, 12, 13, 14])
@@ -33,6 +25,7 @@ eta = 0.001
 epochs = 50
 W_history = []
 loss_history = []
+
 for _ in range(epochs):
     d_w0, d_w1 = dmse_line(x, t, w)
     w[0] -= eta * d_w0
@@ -42,14 +35,6 @@ for _ in range(epochs):
     y_pred = w[0] * x + w[1]
     loss = np.mean((y_pred - t) ** 2)
     loss_history.append(loss)
-
-
-    # plt.plot(loss_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("MSE Loss")
-    # plt.title("손실 함수의 변화")
-    # plt.grid(True)
-    # plt.show()
 
 W_history = np.array(W_history)
 
@@ -80,6 +65,7 @@ def animate(i):
 
 ani = animation.FuncAnimation(fig, animate, frames=len(W_history),
                               init_func=init, blit=True, interval=300, repeat=False)
-plt.show()
 
-ani.save('gradient_descent.gif', writer='pillow', fps=2)
+# 🔽 🔽 🔽 파일로 저장 (GIF 형식)
+ani.save("gradient_descent.gif", writer='pillow', fps=3)
+print("✅ gradient_descent.gif 파일이 저장되었습니다.")
