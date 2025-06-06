@@ -1142,6 +1142,77 @@ def main():
         plt.plot(xb, y, c=[.5, .5, .5], lw=4)
 
 
+#===============   2025 6 6
+
+    def train_gauss_func_gd(x, t, M=4, learning_rate=1e-4, max_iter=10000, tol=1e-6):
+        """
+        가우스 기저 함수 기반 선형 회귀 모델을 경사하강법으로 학습
+
+        Parameters:
+        - x: 입력 (예: 나이)
+        - t: 타겟 (예: 키)
+        - M: 가우스 기저 함수 개수
+        - learning_rate: 학습률
+        - max_iter: 최대 반복 횟수
+        - tol: 수렴 조건 (MSE 변화량)
+
+        Returns:
+        - w: 학습된 가중치
+        - mse_history: MSE 변화 기록
+        """
+        # 1. 기저 함수 행렬 Psi 생성
+        mu = np.linspace(5, 30, M)
+        s = mu[1] - mu[0]
+        N = len(x)
+        Psi = np.ones((N, M + 1))  # 마지막 열은 bias term
+
+        for j in range(M):
+            Psi[:, j] = gauss(x, mu[j], s)
+
+        # 2. 초기 가중치
+        w = np.random.randn(M + 1) * 0.1  # 초기 가중치 소규모 랜덤
+        mse_history = []
+
+        # 3. 경사하강법 반복
+        for epoch in range(max_iter):
+            y = Psi @ w
+            error = y - t
+            mse = np.mean(error ** 2)
+            mse_history.append(mse)
+
+            grad = 2 / N * Psi.T @ error
+            w -= learning_rate * grad
+
+            if epoch > 0 and abs(mse_history[-2] - mse_history[-1]) < tol:
+                print(f"✅ Converged at epoch {epoch}")
+                break
+
+        return w, mse_history
+
+    # x = X0 (나이), t = T (키)
+    W_gd_gauss, mse_hist_gauss = train_gauss_func_gd(X0, T, M=4, learning_rate=1e-4, max_iter=10000)
+
+    print("학습된 가중치:", np.round(W_gd_gauss, 2))
+
+    print("경사하강법 가중치: W_gd_gauss0={0:.1f}, W_gd_gauss1={1:.1f}, W_gd_gauss2={2:.1f}, W_gd_gauss3={2:.1f} , W_gd_gauss4={2:.1f}".format(W_gd_gauss[0], W_gd_gauss[1],
+                                                                                    W_gd_gauss[2], W_gd_gauss[3], W_gd_gauss[4] ))
+
+# 경사하강법 가중치: W_gd_gauss0=31.8, W_gd_gauss1=49.3, W_gd_gauss2=44.7, W_gd_gauss3=44.7 , W_gd_gauss4=44.7
+
+    mse_gauss_func(X0, T, W_gd_gauss)
+    #  SD=95.23174524587131
+
+# 해석해 가중치:
+    # W = [29.4 75.7  2.9 98.3 54.9]
+    # SD=3.98 cm
+    show_gauss_func(W_gd_gauss)
+    plt.title("Gaussian Basis Linear Model (Trained via Gradient Descent)")
+    plt.grid(True)
+    plt.show()
+
+###############################2025  6 6
+
+
     # 메인 ----------------------------------
     plt.figure(figsize=(4, 4))
     M = 4
