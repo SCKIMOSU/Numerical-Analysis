@@ -97,8 +97,9 @@ def main():
 
     import matplotlib.pyplot as plt
 
-    plt.scatter(X, T, color='cornflowerblue', label='Data (T)')
-    plt.plot(np.sort(X), 170 - 108 * np.exp(-0.2 * np.sort(X)), color='red', label='Mean Growth Curve')
+    # plt.scatter(X, T, color='cornflowerblue', label='Data (T)')
+    # plt.plot(np.sort(X), 170 - 108 * np.exp(-0.2 * np.sort(X)), color='red', label='Mean Growth Curve')
+    #
     plt.xlabel("Age")
     plt.ylabel("Height (cm)")
     plt.title("Synthetic Height vs. Age Data")
@@ -267,7 +268,20 @@ def main():
         # w_init의 나이 값 10은 원래 나이 데이터 X 에는 없는 값이다
         # w_init의 키 값 165는 원래 키 데이터 T 에는 없는 값이다
 
-        alpha = 0.001 # 학습률
+        alpha = 0.001
+        # 학습률 0.001 (13821 번)
+        # 학습률 0.0013 (10631번)  0.001 (13821번)
+        # 학습률 0.0014 (9872 번)  0.0015 (9214번)
+        # 학습률 0.0016 (8638 번)  0.0017 (8130번)
+        # 학습률 0.002  (6910 번)
+        # 학습률 0.003  (4606 번)
+        # 학습률 0.004  (22315 번)
+        # 학습률 0.005 RuntimeWarning: invalid value encountered in scalar subtract
+        # 수치 계산 중 NaN(Not a Number) 또는 inf(무한대)가 발생했다는 경고
+        # 학습률(alpha)이 너무 커서 발산
+        # 입력 데이터에 NaN / inf가 포함
+
+
         i_max = 100000 # 반복의 최대 수
         eps = 0.1 # 반복 종료,  기울기의 절대 값의 한계
 
@@ -625,6 +639,132 @@ def main():
         return np.array([w0, w1, w2])
 
 
+##################### 2025/6/6
+
+    # 경사하강법에 의한 학습 함수
+    def train_plane_gd(x0, x1, t, learning_rate=1e-4, max_iter=10000, tol=1e-5):
+        # 초기 가중치 (w0, w1, w2)
+        w = np.zeros(3)
+        N = len(t)
+
+        # 이력 저장 (선택사항)
+        w_history = [w.copy()]
+        mse_history = []
+
+        for epoch in range(max_iter):
+            # 예측값 계산
+            y = w[0] * x0 + w[1] * x1 + w[2]
+
+            # 오차
+            error = y - t
+
+            # MSE
+            mse = np.mean(error ** 2)
+            mse_history.append(mse)
+
+            # 그래디언트 계산
+            grad_w0 = (2 / N) * np.dot(error, x0)
+            grad_w1 = (2 / N) * np.dot(error, x1)
+            grad_w2 = (2 / N) * np.sum(error)
+
+            # 가중치 업데이트
+            w[0] -= learning_rate * grad_w0
+            w[1] -= learning_rate * grad_w1
+            w[2] -= learning_rate * grad_w2
+
+            w_history.append(w.copy())
+
+            # 수렴 조건
+            if epoch > 0 and abs(mse_history[-2] - mse_history[-1]) < tol:
+                print(f"Converged at epoch {epoch}")
+                break
+
+        return w, w_history, mse_history
+
+    # 학습 실행
+    W_gd, w_hist, mse_hist = train_plane_gd(X0, X1, T, learning_rate=1e-4, max_iter=10000)
+
+    # 결과 출력
+    print("학습된 가중치 (경사하강법):", np.round(W_gd, 3))
+    print("최종 MSE:", np.round(mse_hist[-1], 3))
+
+    # 시각화
+    plt.figure(figsize=(6, 5))
+    ax = plt.subplot(1, 1, 1, projection='3d')
+    show_plane(ax, W_gd)  # 학습된 평면
+    show_data2(ax, X0, X1, T)  # 실제 데이터
+    plt.show()
+    print("W_gd0={0:.1f}, W_gd1={1:.1f}, W_gd2={2:.1f}".format(W_gd[0], W_gd[1], W_gd[2]))
+    # MSE 수렴 곡선
+    plt.plot(mse_hist)
+    plt.xlabel("Epoch")
+    plt.ylabel("MSE")
+    plt.title("MSE Convergence (Gradient Descent)")
+    plt.grid(True)
+    plt.show()
+
+##################### 2025/6/6
+
+    def train_plane_gd_improved(x0, x1, t, learning_rate=1e-5, max_iter=50000, tol=1e-7, w_init=None):
+        """
+        2차원 입력(x0, x1) → 출력 t에 대한 선형 회귀 평면을 경사하강법으로 학습.
+
+        Parameters:
+        - x0, x1: 입력 특성 (numpy array)
+        - t: 정답 레이블 (numpy array)
+        - learning_rate: 학습률
+        - max_iter: 최대 반복 횟수
+        - tol: 수렴 판단 기준 (MSE 변화량 기준)
+        - w_init: 초기 가중치 (리스트 or numpy array, 예: [w0, w1, w2])
+
+        Returns:
+        - w: 학습된 가중치 벡터 (numpy array)
+        - mse_history: 각 epoch마다의 MSE 값 리스트
+        """
+        N = len(t)
+        if w_init is None:
+            w = np.zeros(3)
+        else:
+            w = np.array(w_init, dtype=float)
+
+        mse_history = []
+
+        for epoch in range(max_iter):
+            # 예측값 계산
+            y = w[0] * x0 + w[1] * x1 + w[2]
+
+            # 오차 및 MSE 계산
+            error = y - t
+            mse = np.mean(error ** 2)
+            mse_history.append(mse)
+
+            # 그래디언트 계산
+            grad_w0 = (2 / N) * np.dot(error, x0)
+            grad_w1 = (2 / N) * np.dot(error, x1)
+            grad_w2 = (2 / N) * np.sum(error)
+
+            # 가중치 업데이트
+            w[0] -= learning_rate * grad_w0
+            w[1] -= learning_rate * grad_w1
+            w[2] -= learning_rate * grad_w2
+
+            # 수렴 조건 확인
+            if epoch > 0 and abs(mse_history[-2] - mse_history[-1]) < tol:
+                print(f"✅ Converged at epoch {epoch}")
+                break
+
+        return w, mse_history
+
+    # 초기값을 해석해 기반으로 설정
+    w_init = [0.5, 1.1, 89.1]
+    W_gd_imp, mse_hist = train_plane_gd_improved(X0, X1, T, learning_rate=1e-5, max_iter=50000, w_init=w_init)
+
+    print("학습된 가중치:", np.round(W_gd_imp, 4))
+    print("개선된 가중치: W_gd_imp0={0:.1f}, W_gd_imp1={1:.1f}, W_gd_imp2={2:.1f}".format(W_gd_imp[0], W_gd_imp[1], W_gd_imp[2]))
+
+#  w0=0.5, w1=1.1, w2=89.1 해석해
+# W_gd0=-0.8, W_gd1=2.9, W_gd2=3.1 : 경사하강법
+# 개선된 가중치: W_gd_imp0=0.5, W_gd_imp1=1.1, W_gd_imp2=89.1 : 경사하강법
     # 메인 ------------------------------------
     plt.figure(figsize=(6, 5))
     ax = plt.subplot(1, 1, 1, projection='3d')
@@ -1034,8 +1174,6 @@ def main():
         plt.grid(True)
         plt.ylim(130, 180)
         mse = mse_gauss_func(X, T, W)
-
-
         plt.title("M={0:d}, SD={1:.1f}".format(M[i], np.sqrt(mse)))
     plt.show()
 
