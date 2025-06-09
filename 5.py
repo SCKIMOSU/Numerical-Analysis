@@ -501,10 +501,10 @@ def main():
             # (70.43231869836629, 70.43231869836629)
             # 120, t[i]
             # (120, 170.91013144599378)
-            ax.plot(x0, x1, t, 'o',
-                    color='cornflowerblue', markeredgecolor='black',
-                    markersize=6, markeredgewidth=0.5)
-            ax.view_init(elev=35, azim=-75)
+        ax.plot(x0, x1, t, 'o',
+                color='cornflowerblue', markeredgecolor='black',
+                markersize=6, markeredgewidth=0.5)
+        ax.view_init(elev=35, azim=-75)
 
 
     # 메인 ------------------------------------
@@ -639,8 +639,7 @@ def main():
         return np.array([w0, w1, w2])
 
 
-##################### 2025/6/6
-
+    ##################### 2025/6/6
     # 경사하강법에 의한 학습 함수
     def train_plane_gd(x0, x1, t, learning_rate=1e-4, max_iter=10000, tol=1e-5):
         # 초기 가중치 (w0, w1, w2)
@@ -696,6 +695,7 @@ def main():
     plt.show()
     print("W_gd0={0:.1f}, W_gd1={1:.1f}, W_gd2={2:.1f}".format(W_gd[0], W_gd[1], W_gd[2]))
     # MSE 수렴 곡선
+    plt.figure()
     plt.plot(mse_hist)
     plt.xlabel("Epoch")
     plt.ylabel("MSE")
@@ -755,7 +755,7 @@ def main():
 
         return w, mse_history
 
-    # 초기값을 해석해 기반으로 설정
+# 초기값을 해석해 기반으로 설정
     w_init = [0.5, 1.1, 89.1]
     W_gd_imp, mse_hist = train_plane_gd_improved(X0, X1, T, learning_rate=1e-5, max_iter=50000, w_init=w_init)
 
@@ -907,6 +907,9 @@ def main():
 
         for j in range(m):
             y = y + w[j] * gauss(x, mu[j], s)
+
+
+
             # w[0] = 29 * [0,1], mu[0] = 5   [0,29]@5
             # j=0
             # np.round(y)
@@ -918,6 +921,21 @@ def main():
             #         5.,  4.,  4.,  4.,  4.,  3.,  3.,  3.,  3.,  3.,  2.,  2.,  2.,
             #         2.,  2.,  2.,  2.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,
             #         1.,  1.,  1.,  1.,  0.,  0.,  0.,  0.,  0.])
+
+            # y4 = w[j] * gauss(x, mu[j], s)
+            # plt.figure(1, figsize=(4, 4))
+            # y1 = y
+            # plt.plot(x, y4, color='gray', linewidth=3)
+            # j=1
+            # y2 = w[j] * gauss(x, mu[j], s)
+            # plt.plot(x, y2, color='gray', linewidth=3)
+
+            # plt.figure(2, figsize=(4, 4))
+            # y1 = y
+            # plt.plot(x, y1, color='gray', linewidth=3)
+            # plt.figure(2, figsize=(4, 4))
+            # y = y1+y2+y3+y4
+            # plt.plot(x, y, color='gray', linewidth=3)
 
             # j=1
             # y = y + w[j] * gauss(x, mu[j], s)
