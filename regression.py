@@ -45,7 +45,7 @@ plt.show()
 plt.figure(4)
 plt.plot(x, y, 'o')
 plt.grid()
-plt.show()
+
 xp=np.linspace(-2, 6, 100)
 
 plt.plot(xp, np.polyval(p1,xp), 'r-')
