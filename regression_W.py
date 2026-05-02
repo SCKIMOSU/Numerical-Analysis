@@ -1,46 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
-#import tensorflow as tf
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-# print(tf.__version__)
 
 X = np.array([1., 2., 3.])
 Y = np.array([1., 2., 3.])
 m = len(X)
 
-W = tf.placeholder(tf.float32)
+# W를 -3.0에서 5.0까지 0.1 간격으로 (총 81개 점)
+W_val = np.linspace(-3.0, 5.0, 81)
 
-#hypothesis = tf.mul(W, X)
-hypothesis = W*X
-cost = tf.reduce_sum(tf.pow(hypothesis-Y, 2)) / m
+# 브로드캐스팅으로 한 번에 cost 계산
+#   hypothesis: shape (81, 3) — 각 W에 대해 W*X
+#   cost: shape (81,)         — 각 W에 대한 MSE
+hypothesis = W_val[:, None] * X[None, :]
+cost_val   = np.sum((hypothesis - Y)**2, axis=1) / m
 
-init = tf.initialize_all_variables()
+# 출력
+for w, c in zip(W_val, cost_val):
+    print(f'{w:5.1f}, {c:6.2f}')
 
-sess = tf.Session()
-sess.run(init)
-
-# 그래프로 표시하기 위해 데이터를 누적할 리스트
-W_val, cost_val = [], []
-
-# 0.1 단위로 증가할 수 없어서 -30부터 시작. 그래프에는 -3에서 5까지 표시됨.
-for i in range(-30, 50):
-    xPos = i*0.1                                    # x 좌표. -3에서 5까지 0.1씩 증가
-    yPos = sess.run(cost, feed_dict={W: xPos})      # x 좌표에 따른 y 값
-
-    print('{:3.1f}, {:3.1f}'.format(xPos, yPos))
-
-    # 그래프에 표시할 데이터 누적. 단순히 리스트에 갯수를 늘려나감
-    W_val.append(xPos)
-    cost_val.append(yPos)
-
-sess.close()
-
-#np.where(np.round(cost_val, 2) == 0.0)
-#W_val[40]
-
+# 시각화
 plt.plot(W_val, cost_val)
 plt.xlabel('W')
 plt.ylabel('cost')
-plt.grid()
+plt.grid(True)
 plt.show()
