@@ -30,7 +30,7 @@ def f1d(x):
 xx = np.linspace(-1, 4, 100)
 
 plt.plot(xx, f1(xx), 'k-')
-plt.show()
+#plt.show()
 #plt.hold('on')
 # step size
 mu = 0.4
@@ -40,7 +40,7 @@ x = 0
 plt.plot(x, f1(x), 'go', markersize=10)
 plt.text(x + 0.1, f1(x) + 0.1, "1st trial")
 plt.plot(xx, f1d(x) * (xx - x) + f1(x), 'b--')
-plt.show()
+#plt.show()
 #plt.hold('on')
 
 # f1(x)에서 접선 긋기
@@ -78,7 +78,7 @@ plt.xlabel("x")
 plt.ylabel("$f_1(x)$")
 plt.title("optimization by gradient descent")
 plt.ylim(0, 10)
-plt.show()
+#plt.show()
 
 
 
