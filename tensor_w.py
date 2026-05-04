@@ -1,99 +1,61 @@
-
-
 import numpy as np
 import matplotlib.pyplot as plt
-#import tensorflow as tf
 
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-# 텐서플로우 2.0 환경에서 1.x 코드 실행하기
-print(tf.__version__)
+# 재현성을 위한 시드 (선택)
+rng = np.random.default_rng(42)
 
 
-def Data_Genearion(num_points):
-    #num_points = 50
-    vectors_set = []
-    for i in np.arange(num_points):
-        x = np.random.normal(2, 2) + 10
-        # [0,4] @ 68% + 10 =  [10,14] @ 68%
-        y = x * 5 + (np.random.normal(0, 3)) * 2
-        # [10,14] @ 68%  *5 = [50, 70] @ 68%
-        # [50, 70] @ 68% + [-3, 3] @ 68% *2  = [44, 76] @ 68%
-        vectors_set.append([x, y])
-
-        # print(np.round(vectors_set, 1))
-
-    x_data = [v[0] for v in vectors_set]
-    y_data = [v[1] for v in vectors_set]
-    # print(np.round(x_data, 1))
-    # print(np.round(y_data, 1))
-    return  x_data, y_data
+def data_generation(num_points):
+    """y = 5x + noise 형태의 합성 데이터 생성"""
+    x_data = rng.normal(2, 2, num_points) + 10           # x ~ N(12, 2²)
+    y_data = x_data * 5 + rng.normal(0, 3, num_points) * 2  # y = 5x + noise
+    return x_data, y_data
 
 
-
-def Data_Draw(x_data, y_data):
-    plt.plot(x_data, y_data,'ro')
-    plt.ylim([0,100])
-    plt.xlim([0,25])
-    plt.xlabel('x')
-    plt.ylabel('y')
-    #plt.legend()
+def data_draw(x_data, y_data):
+    """데이터 산점도"""
+    plt.plot(x_data, y_data, 'ro')
+    plt.xlim([0, 25])
+    plt.ylim([0, 100])
+    plt.xlabel('x'); plt.ylabel('y')
     plt.show()
 
 
-def Data_Learning(x_data, y_data):
-    W = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
-    # init = tf.initialize_all_variables()
-    # sess = tf.Session()
-    # sess.run(init)
-    # sess.run(W)
-    # print('sess.run(W)= ', sess.run(W))
-    # array([0.05211711], dtype=float32)
+def data_learning(x_data, y_data, lr=0.0015, n_steps=10):
+    """경사하강법으로 W, b 학습"""
+    # 초기화 — TF 코드와 동등하게 W는 [-1,1] 균등, b는 0
+    W = rng.uniform(-1.0, 1.0)
+    b = 0.0
+    N = len(x_data)
 
-    b = tf.Variable(tf.zeros([1]))
-    # init = tf.initialize_all_variables()
-    # sess = tf.Session()
-    # sess.run(init)
-    # sess.run(b)
-    # array([0.], dtype=float32)
+    for step in range(n_steps):
+        # Forward: 예측과 손실
+        y_pred = W * x_data + b
+        residual = y_pred - y_data
+        loss = np.mean(residual ** 2)
 
-    y = W * x_data + b
-    # sess.run(y)
-    # print(np.round(sess.run(y),1))
+        # Backward: 해석적 그래디언트
+        grad_W = 2.0 * np.mean(residual * x_data)
+        grad_b = 2.0 * np.mean(residual)
 
-    loss = tf.reduce_mean(tf.square(y - y_data))
-    # print(np.round(sess.run(loss),1))
-    # optimizer = tf.train.GradientDescentOptimizer(0.0015)
-    #
-    #optimizer = tf.train.GradientDescentOptimizer(0.0001)
-    # 느린 수렴 : (0.0001) --> for step in np.arange(1000):
-    #
+        # Update: 파라미터 갱신
+        W -= lr * grad_W
+        b -= lr * grad_b
 
-    optimizer = tf.train.GradientDescentOptimizer(0.0015)
-    # 적절한 수렴 : (0.0015) --> for step in np.arange(10):
-    # 반복 연산복잡도를 줄이는 중요한 역할을 하는 학습률
+        # 로그 + 시각화
+        print(f'{step}  W=[{W:.6f}]  b=[{b:.6f}]')
+        print(f'{step}  loss={loss:.4f}')
 
-    train = optimizer.minimize(loss)
-
-    init = tf.initialize_all_variables()
-    sess = tf.Session()
-    sess.run(init)
-
-
-    for step in np.arange(10):
-        sess.run(train)
-        print(step, sess.run(W), sess.run(b))
-        print(step, sess.run(loss))
         plt.plot(x_data, y_data, 'ro')
-        plt.plot(x_data, sess.run(W) * x_data + sess.run(b))
-        plt.xlabel('x')
-        plt.ylabel('y')
-        #plt.legend()
+        plt.plot(x_data, W * x_data + b)
+        plt.xlabel('x'); plt.ylabel('y')
         plt.show()
+
+    return W, b
 
 
 if __name__ == '__main__':
-    num_points=50
-    x_data, y_data=Data_Genearion(num_points)
-    Data_Draw(x_data, y_data)
-    Data_Learning(x_data, y_data)
+    num_points = 50
+    x_data, y_data = data_generation(num_points)
+    data_draw(x_data, y_data)
+    data_learning(x_data, y_data)
