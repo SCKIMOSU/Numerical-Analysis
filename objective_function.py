@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 def f1(x):
     return (x - 2) ** 2 + 2
 
-xx = np.linspace(-1, 4, 100)
+xx = np.round(np.linspace(-1, 4, 100),2)
+
 plt.plot(xx, f1(xx))
 plt.plot(2, 2, 'ro', markersize=10)
 plt.ylim(0, 10)
@@ -27,7 +28,7 @@ def f1d(x):
     return 2 * (x - 2.0)
 
 
-xx = np.linspace(-1, 4, 100)
+xx = np.round(np.linspace(-1, 4, 100),2)
 
 plt.plot(xx, f1(xx), 'k-')
 #plt.show()
@@ -82,7 +83,7 @@ plt.ylim(0, 10)
 
 
 
-xx = np.linspace(-3, 8, 100)
+xx = np.round(np.linspace(-3, 8, 100),2)
 plt.figure(2)
 plt.plot(xx, f1(xx), 'k-')
 #plt.show()
