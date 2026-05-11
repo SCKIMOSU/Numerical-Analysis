@@ -264,13 +264,26 @@ ax.arrow(0, 0, 0.5, 0.5, head_width=0.05, head_length=0.1, fc='k', ec='k')
 plt.show()
 '''
 
+# GD: 정확한 gradient
 x, y = -1, -1
-for i in range(100): # 5000
+for i in range(10):
     g = f2g(x, y)
-    plt.arrow(x, y, -s * mu * g[0], -s * mu * g[1],
+    plt.arrow(x, y, -mu*g[0], -mu*g[1],
               head_width=0.04, head_length=0.04, fc='k', ec='k', lw=2)
-    x = x - mu * g[0]
-    y = y - mu * g[1]
+    x -= mu * g[0]
+    y -= mu * g[1]
+
+# SGD (시뮬레이션): gradient에 가우시안 노이즈 추가
+x, y = -1, -1
+sigma = 0.5  # 노이즈 크기
+for i in range(10):
+    g = f2g(x, y)
+    noise = np.random.randn(2) * sigma * np.linalg.norm(g)
+    g_noisy = g + noise        # ← 핵심: 잡음 섞인 gradient
+    plt.arrow(x, y, -mu*g_noisy[0], -mu*g_noisy[1],
+              head_width=0.04, head_length=0.04, fc='r', ec='r', lw=2)
+    x -= mu * g_noisy[0]
+    y -= mu * g_noisy[1]
 
 
 plt.xlim(-3, 3)
