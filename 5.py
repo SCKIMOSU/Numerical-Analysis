@@ -162,7 +162,8 @@ def main():
     #i1_min, i0_min = np.where(J == np.min(J))
     #w0_min = x0[i0_min[0]]
     #w1_min = x1[i1_min[0]]
-
+    #w0_min = 1.7676767676767682
+    #w1_min = 132.62626262626262
 
     # np.round(J, 2)
     # np.min(J) = 50.832
