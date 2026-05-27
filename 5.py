@@ -42,7 +42,7 @@ def main():
     # -Prm_c[2] * X :  -1* [1,6] @ 100% = [-6,-1]@ 100%
     # np.exp(-Prm_c[2] * X) : [0.0025,0.3679]@ 100%
     # Prm_c[1] * np.exp(-Prm_c[2] * X) = 108 * [0.0025,0.3679]@ 100%
-      # 108*np.exp(-6) = 0.268
+      # c*np.exp(-6) = 0.268
       # 108*np.exp(-1) = 39.731
     # Prm_c[1] * np.exp(-Prm_c[2] * X) :  [0.268, 39.731]@ 100%
     # Prm_c[0] - Prm_c[1] * np.exp(-Prm_c[2] * X) = 170-[0.268, 39.731]@ 100%
@@ -97,8 +97,8 @@ def main():
 
     import matplotlib.pyplot as plt
 
-    # plt.scatter(X, T, color='cornflowerblue', label='Data (T)')
-    # plt.plot(np.sort(X), 170 - 108 * np.exp(-0.2 * np.sort(X)), color='red', label='Mean Growth Curve')
+    plt.scatter(X, T, color='cornflowerblue', label='Data (T)')
+    plt.plot(np.sort(X), 170 - 108 * np.exp(-0.2 * np.sort(X)), color='red', label='Mean Growth Curve')
     #
     plt.xlabel("Age")
     plt.ylabel("Height (cm)")
@@ -150,12 +150,21 @@ def main():
     x0 = np.linspace(w0_range[0], w0_range[1], xn) #나이
     x1 = np.linspace(w1_range[0], w1_range[1], xn) # 키
     xx0, xx1 = np.meshgrid(x0, x1) # 전수검사
+    # np.round(xx0, 2)
+    # np.round(xx1, 2)
     J = np.zeros((len(x0), len(x1)))
     for i0 in range(xn):
         for i1 in range(xn):
             J[i1, i0] = mse_line(X, T, (x0[i0], x1[i1])) # 튜플 자료형
             #  나이, 키, (나이 , w[0]), (키 , w[1])
 
+    ## 방법 1: np.where 사용
+    #i1_min, i0_min = np.where(J == np.min(J))
+    #w0_min = x0[i0_min[0]]
+    #w1_min = x1[i1_min[0]]
+
+
+    # np.round(J, 2)
     # np.min(J) = 50.832
     # np.max(J) = 188155.061
 
